@@ -13,7 +13,7 @@
 - [ ] Website - Show stats
 
 ## Contributors
-This project ahders followoing guideliens.
+This project adheres followoing guideliens.
 - https://github.com/dotnet/runtime/blob/main/docs/coding-guidelines/coding-style.md
 - https://github.com/dotnet/runtime/tree/main/docs#coding-guidelines
 
