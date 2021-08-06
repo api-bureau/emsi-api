@@ -3,6 +3,7 @@
 ## To Do 
 
 - [ ] Check Emsi Endpoints https://api.emsidata.com/apis/skills
+- [ ] Create Postman collection
 - [ ] Create Console Application to access APIs
 - [ ] Create Library to access APIs, add this Library to NuGet, implement CI/CD (Deployment)
 - [ ] Create Console Application which uses the library
@@ -19,5 +20,9 @@ This project adheres followoing guideliens.
 
 ## Code of Conduct
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/).
+
+## References
+- Request API Key https://www.economicmodeling.com/open-titles-api-contact/
+- Emsi Skills API https://api.emsidata.com/apis/skills
 
 
