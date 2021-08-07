@@ -1,6 +1,6 @@
 # Emsi Client
 
-The purpose of this project is to help you exploring Emsi APIs and speed up your with C# and .NET Core implementation.
+The purpose of this project is to help you exploring Emsi APIs and speed up your C# and .NET Core implementation.
 
 ## To Do 
 
