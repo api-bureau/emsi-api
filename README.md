@@ -25,7 +25,7 @@
 - [ ]  Emsi.Web (Web) Razor, Blazor, Angular, Azure App Service 
 
 ## Contributors
-This project adheres followoing guideliens.
+This project adheres following guidelines.
 - https://github.com/dotnet/runtime/blob/main/docs/coding-guidelines/coding-style.md
 - https://github.com/dotnet/runtime/tree/main/docs#coding-guidelines
 
