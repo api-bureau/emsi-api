@@ -12,7 +12,6 @@
 - [ ] Website - Add Search Skill
 - [ ] Website - Add Search Skill by Type
 - [ ] Website - Show stats
-
 - [ ] Emsi.Playground (Console App)
 - [ ]  Emsi.Api.Client (Library, NuGet)
   - Emsi.Api.Skills
