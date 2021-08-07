@@ -1,5 +1,7 @@
 # Emsi Client
 
+The purpose of this project is to help you exploring Emsi APIs and speed up your with C# and .NET Core implementation.
+
 ## To Do 
 
 - [x] Check Emsi Endpoints https://api.emsidata.com/apis/skills
