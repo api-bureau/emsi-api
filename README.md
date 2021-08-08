@@ -5,7 +5,7 @@ The purpose of this project is to help you exploring Emsi APIs and speed up your
 ## To Do 
 
 - [x] Check Emsi Endpoints https://api.emsidata.com/apis/skills
-- [ ] Create Postman collection
+- [x] Create Postman collection
 - [x] Create Console Application to access APIs
 - [ ] Create Library to access APIs, add this Library to NuGet, implement CI/CD (Deployment)
 - [ ] Create Console Application which uses the library
