@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "73a4cc66-ab7f-4aed-aa5e-2e60d45d272f",
+		"_postman_id": "148be489-5e91-434c-b2f3-04b3dd2db660",
 		"name": "Emsi",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -39,6 +39,122 @@
 							"path": [
 								"skills",
 								"meta"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Versions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/skills/versions",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"skills",
+								"versions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Versions - metadata",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/skills/versions/latest",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"skills",
+								"versions",
+								"latest"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Version - Changes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/skills/versions/latest/changes",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"skills",
+								"versions",
+								"latest",
+								"changes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List all Skills",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/skills/versions/latest/skills?q=.NET&typeIds=ST1,ST2&fields=id,name,type,infoUrl&limit=5",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"skills",
+								"versions",
+								"latest",
+								"skills"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": ".NET"
+								},
+								{
+									"key": "typeIds",
+									"value": "ST1,ST2"
+								},
+								{
+									"key": "fields",
+									"value": "id,name,type,infoUrl"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Skill by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/skills/versions/latest/skills/KS124JB619VXG6RQ810C",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"skills",
+								"versions",
+								"latest",
+								"skills",
+								"KS124JB619VXG6RQ810C"
 							]
 						}
 					},
