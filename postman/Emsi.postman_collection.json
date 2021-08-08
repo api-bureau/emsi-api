@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "148be489-5e91-434c-b2f3-04b3dd2db660",
+		"_postman_id": "f564ad97-08f4-45e2-9b08-cc91c7c31a2f",
 		"name": "Emsi",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -155,6 +155,137 @@
 								"latest",
 								"skills",
 								"KS124JB619VXG6RQ810C"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List requested skills",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"ids\": [ \"KS1200364C9C1LK3V5Q1\", \"KS1275N74XZ574T7N47D\", \"KS125QD6K0QLLKCTPJQ0\" ] }"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/skills/versions/latest/skills?typeIds=ST1%2CST2&fields=id%2Cname%2Ctype%2CinfoUrl",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"skills",
+								"versions",
+								"latest",
+								"skills"
+							],
+							"query": [
+								{
+									"key": "typeIds",
+									"value": "ST1%2CST2"
+								},
+								{
+									"key": "fields",
+									"value": "id%2Cname%2Ctype%2CinfoUrl"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find related skills",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"ids\": [ \"KS1200364C9C1LK3V5Q1\", \"KS1275N74XZ574T7N47D\", \"KS125QD6K0QLLKCTPJQ0\" ] }"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/skills/versions/latest/related",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"skills",
+								"versions",
+								"latest",
+								"related"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Extract skills from document",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"text\": \"... Great candidates also have\\n\\n Experience with a particular JS MV* framework (we happen to use React)\\n Experience working with databases\\n Experience with AWS\\n Familiarity with microservice architecture\\n Familiarity with modern CSS practices, e.g. LESS, SASS, CSS-in-JS ...\",\r\n  \"confidenceThreshold\": 0.6\r\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/skills/versions/latest/extract",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"skills",
+								"versions",
+								"latest",
+								"extract"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Extract skills with source tracing",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"text\": \"... Great candidates also have\\n\\n Experience with a particular JS MV* framework (we happen to use React)\\n Experience working with databases\\n Experience with AWS\\n Familiarity with microservice architecture\\n Familiarity with modern CSS practices, e.g. LESS, SASS, CSS-in-JS ...\"\r\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/skills/versions/latest/extract/trace",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"skills",
+								"versions",
+								"latest",
+								"extract",
+								"trace"
 							]
 						}
 					},
