@@ -1,6 +1,7 @@
 using Emsi.Playground.Dtos;
 using Microsoft.Extensions.Configuration;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
@@ -29,6 +30,7 @@ namespace Emsi.Playground
             await GetStatusAsync();
             await GetMetaAsync();
             await GetAllVersionsAsync();
+            await GetAllSkillsAsync(".NET", "ST1,ST2", "id,name,type,infoUrl", 5);
         }
 
         private static async Task GetStatusAsync()
@@ -114,10 +116,47 @@ namespace Emsi.Playground
                 foreach (var data in dto.Data)
                     Console.WriteLine(data);
             }
-
-
         }
 
+        private static async Task GetAllSkillsAsync(string Skills, string TypeIds, string Fields, int Limit)
+        {
+            using var client = new HttpClient();
+
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", GetToken());
+
+            SkillsDto? dto;
+
+            try
+            {
+                string queryparams = $"q={Skills}&typeIds={TypeIds}&fields={Fields},name,type,infoUrl&limit={Limit}";
+                dto = await client.GetFromJsonAsync<SkillsDto>($"{GetBaseUrl()}/skills/versions/latest/skills?{queryparams}");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"My message: {e.Message}");
+                throw;
+            }
+
+            if (dto is not null)
+            {
+                Console.WriteLine("\nList of all Skills:");
+
+                foreach (var attr in dto.Attributions)
+                {
+                    Console.WriteLine(attr.Name);
+                    Console.WriteLine(attr.Text);
+                }
+
+                foreach (var data in dto.Data)
+                {
+                    Console.WriteLine(data.Id);
+                    Console.WriteLine(data.InfoUrl);
+                    Console.WriteLine(data.Name);
+                    Console.WriteLine(data.Type.Id);
+                    Console.WriteLine(data.Type.Name);
+                }
+            }
+        }
         private static string GetToken()
         {
             return Configuration["EmsiSettings:AccessToken"];
