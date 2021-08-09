@@ -27,13 +27,15 @@ dotnet_naming_symbols.constant_fields.applicable_kinds            = field
 dotnet_naming_symbols.constant_fields.required_modifiers          = const
 dotnet_naming_style.pascal_case_style.capitalization              = pascal_case
 
+# private readonly ILogger<NeptuneClient> _logger;
+dotnet_naming_rule.camel_case_for_private_internal_fields.severity = suggestion
+dotnet_naming_rule.camel_case_for_private_internal_fields.symbols  = private_internal_fields
+dotnet_naming_rule.camel_case_for_private_internal_fields.style    = camel_case_underscore_style
+dotnet_naming_symbols.private_internal_fields.applicable_kinds = field
+dotnet_naming_symbols.private_internal_fields.applicable_accessibilities = private, internal
+dotnet_naming_style.camel_case_underscore_style.required_prefix = _
+dotnet_naming_style.camel_case_underscore_style.capitalization = camel_case
+
 # Xml files
 [*.xml]
 indent_size = 2
-#[*.{razor,cshtml}]
-#charset = utf-8-bom
-
-#[*.cs]
-#dotnet_diagnostic.CA1304.severity = error
-#dotnet_diagnostic.CA1305.severity = error
-#dotnet_diagnostic.CA1310.severity = error
