@@ -1,14 +1,12 @@
-using Emsi.Playground.Dtos;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Net.Http.Json;
 using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Emsi.Playground
 {
+    // Startup.cs 
     public class Program
     {
         private static IConfigurationRoot Configuration { get; set; }
@@ -22,73 +20,29 @@ namespace Emsi.Playground
         {
             var builder = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json", true)
-                .AddUserSecrets<Program>();
+                .AddUserSecrets<Program>()
+                .AddEnvironmentVariables();
 
             Configuration = builder.Build();
 
-            await GetStatusAsync();
-            await GetMetaAsync();
-        }
+            var emsiClient = new EmsiClient(Configuration, new HttpClient());
 
-        private static async Task GetStatusAsync()
-        {
-            using var client = new HttpClient();
+            var statusDto = await emsiClient.Skills.GetStatusAsync();
 
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", GetToken());
-
-            StatusDto? dto;
-
-            try
+            if (statusDto is not null)
             {
-                dto = await client.GetFromJsonAsync<StatusDto>($"{GetBaseUrl()}/skills/status");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"My message: {e.Message}");
-                throw;
+                Console.WriteLine(statusDto.Data.Healthy);
+                Console.WriteLine(statusDto.Data.Message);
             }
 
-            if (dto is not null)
+            var metaDto = await emsiClient.Skills.GetMetaAsync();
+
+            if (metaDto is not null)
             {
-                Console.WriteLine(dto.Data.Healthy);
-                Console.WriteLine(dto.Data.Message);
+                Console.WriteLine(metaDto.Data.Attribution.Title);
+                Console.WriteLine(metaDto.Data.Attribution.Body);
+                Console.WriteLine(metaDto.Data.LatestVersion);
             }
-        }
-
-        private static async Task GetMetaAsync()
-        {
-            using var client = new HttpClient();
-
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", GetToken());
-
-            MetaDto? dto;
-
-            try
-            {
-                dto = await client.GetFromJsonAsync<MetaDto>($"{GetBaseUrl()}/skills/meta");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"My message: {e.Message}");
-                throw;
-            }
-
-            if (dto is not null)
-            {
-                Console.WriteLine(dto.Data.Attribution.Title);
-                Console.WriteLine(dto.Data.Attribution.Body);
-                Console.WriteLine(dto.Data.LatestVersion);
-            }
-        }
-
-        private static string GetToken()
-        {
-            return Configuration["EmsiSettings:AccessToken"];
-        }
-
-        private static string GetBaseUrl()
-        {
-            return Configuration["EmsiSettings:Url"];
         }
     }
 }
