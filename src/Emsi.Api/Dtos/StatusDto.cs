@@ -1,4 +1,4 @@
-namespace Emsi.Playground.Dtos
+namespace Emsi.Api.Dtos
 {
     //ToDo Refactor to generic container
 
@@ -11,5 +11,19 @@ namespace Emsi.Playground.Dtos
     {
         public string Message { get; set; } = null!;
         public bool Healthy { get; set; }
+    }
+
+    public class ResponseDto<T>
+    {
+        public ErrorDto? Error { get; set; }
+            
+        public T Value { get; set; }
+
+        public bool IsSuccess => Error == null;
+    }
+
+    public class ErrorDto
+    {
+
     }
 }

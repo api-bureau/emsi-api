@@ -1,4 +1,4 @@
-namespace Emsi.Playground.Dtos
+namespace Emsi.Api.Dtos
 {
     //ToDo Refactor to generic container
 
