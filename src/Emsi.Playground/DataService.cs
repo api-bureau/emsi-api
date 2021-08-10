@@ -1,4 +1,4 @@
-﻿using Emsi.Api;
+using Emsi.Api;
 using System;
 using System.Threading.Tasks;
 
@@ -15,8 +15,6 @@ namespace Emsi.Playground
 
         public async Task RunAsync()
         {
-            //var emsiClient = new EmsiClient(Configuration, new HttpClient());
-
             var statusDto = await _emsiClient.Skills.GetStatusAsync();
 
             if (statusDto is not null)

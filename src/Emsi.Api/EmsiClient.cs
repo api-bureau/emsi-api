@@ -1,14 +1,14 @@
-using IdentityModel.Client;
 using Microsoft.Extensions.Options;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Emsi.Api
 {
-
     public class EmsiClient
     {
         private readonly EmsiSettings _settings;
@@ -26,34 +26,20 @@ namespace Emsi.Api
         {
             _settings = settings.Value;
             _client = client;
-            //_client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _settings.AccessToken);
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _settings.AccessToken);
 
             Skills = new SkillEndpoint(this);
         }
 
         public async Task AuthenticateAsync()
         {
-            //var response = await _client.PostAsync(_settings.AuthorisationUrl, new FormUrlEncodedContent(new List<KeyValuePair<string?, string?>>
-            //        {
-            //            new KeyValuePair<string?, string?>("client_id", _settings.ClientId),
-            //            new KeyValuePair<string?, string?>("client_secret", _settings.ClientSecret),
-            //            new KeyValuePair<string?, string?>("grant_type", "client_credentials"),
-            //            new KeyValuePair<string?, string?>("scope", _settings.Scope),
-            //        }));
-
-            var request = new ClientCredentialsTokenRequest
-            {
-                Address = _settings.AuthorisationUrl,
-                ClientId = _settings.ClientId,
-                ClientSecret = _settings.ClientSecret,
-                Scope = _settings.Scope
-            };
-
-            var response2 = await _client.RequestClientCredentialsTokenAsync(request);
-
-            _client.SetBearerToken(response2.AccessToken);
-
-            _client.exp
+            var response = await _client.PostAsync(_settings.AuthorisationUrl, new FormUrlEncodedContent(new List<KeyValuePair<string?, string?>>
+                    {
+                        new KeyValuePair<string?, string?>("client_id", _settings.ClientId),
+                        new KeyValuePair<string?, string?>("client_secret", _settings.ClientSecret),
+                        new KeyValuePair<string?, string?>("grant_type", "client_credentials"),
+                        new KeyValuePair<string?, string?>("scope", _settings.Scope),
+                    }));
         }
 
         public async Task<T?> GetAsync<T>(string endpoint)
