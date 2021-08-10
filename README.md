@@ -20,8 +20,7 @@ The purpose of this project is to help you exploring Emsi APIs and speed up your
 
 ## Projects
 - [x] Emsi.Playground (Console App)
-- [ ]  Emsi.Api.Client (Library, NuGet)
-  - Emsi.Api.Skills
+- [x] Emsi.Api.Client (Library, NuGet)
 - [ ]  Emsi.Api.Console (Console App)
 - [ ]  Emsi.Database (Library, SQLite)
 - [ ]  Emsi.Api.Sync.Console (Console App) 
