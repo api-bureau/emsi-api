@@ -3,6 +3,11 @@ using System.Threading.Tasks;
 
 namespace Emsi.Api
 {
+    public class OccupationEndpoint
+    {
+
+    }
+
     public class SkillEndpoint
     {
         private const string Endpoint = "/skills";

@@ -15,6 +15,13 @@ namespace Emsi.Playground
 
         public async Task RunAsync()
         {
+            //var responseDto = await _emsiClient.Skills.GetStatusAsync();
+
+            //if (!responseDto.IsSuccess)
+            //{
+            //    responseDto.Error.Message
+            //}
+
             var statusDto = await _emsiClient.Skills.GetStatusAsync();
 
             if (statusDto is not null)
