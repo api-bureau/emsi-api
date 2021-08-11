@@ -17,6 +17,7 @@ The purpose of this project is to help you exploring Emsi APIs and speed up your
 - [ ] Website - Add Search Skill by Type
 - [ ] Website - Show stats
 - [ ] CI/CD (Deployment)
+- [ ] Add some documentation
 - [ ] Migrate to .NET 6
 
 ## Projects
