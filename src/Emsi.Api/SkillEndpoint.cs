@@ -1,8 +1,13 @@
-﻿using Emsi.Playground.Dtos;
+using Emsi.Api.Dtos;
 using System.Threading.Tasks;
 
-namespace Emsi.Playground
+namespace Emsi.Api
 {
+    public class OccupationEndpoint
+    {
+
+    }
+
     public class SkillEndpoint
     {
         private const string Endpoint = "/skills";

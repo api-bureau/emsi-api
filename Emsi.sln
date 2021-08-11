@@ -5,11 +5,15 @@ VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EB965DA8-FEC1-40F1-BE84-0568DAB66EDA}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		postman\Emsi Training.postman_environment.json = postman\Emsi Training.postman_environment.json
+		src\Emsi.Api\Emsi.Api.csproj = src\Emsi.Api\Emsi.Api.csproj
 		postman\Emsi.postman_collection.json = postman\Emsi.postman_collection.json
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emsi.Playground", "Emsi.Playground\Emsi.Playground.csproj", "{6F84EBE5-EFC1-4A30-B1C8-7CA0A5D7C829}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Emsi.Playground", "src\Emsi.Playground\Emsi.Playground.csproj", "{0D90675C-B3BC-4766-95AC-ACABB265EEEB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Emsi.Api", "src\Emsi.Api\Emsi.Api.csproj", "{12D0D483-409D-4EAF-B03C-95D2C08744D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +21,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6F84EBE5-EFC1-4A30-B1C8-7CA0A5D7C829}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6F84EBE5-EFC1-4A30-B1C8-7CA0A5D7C829}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6F84EBE5-EFC1-4A30-B1C8-7CA0A5D7C829}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6F84EBE5-EFC1-4A30-B1C8-7CA0A5D7C829}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D90675C-B3BC-4766-95AC-ACABB265EEEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D90675C-B3BC-4766-95AC-ACABB265EEEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D90675C-B3BC-4766-95AC-ACABB265EEEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D90675C-B3BC-4766-95AC-ACABB265EEEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12D0D483-409D-4EAF-B03C-95D2C08744D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12D0D483-409D-4EAF-B03C-95D2C08744D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12D0D483-409D-4EAF-B03C-95D2C08744D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12D0D483-409D-4EAF-B03C-95D2C08744D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
