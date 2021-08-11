@@ -16,7 +16,8 @@ The purpose of this project is to help you exploring Emsi APIs and speed up your
 - [ ] Website - Add Search Skill
 - [ ] Website - Add Search Skill by Type
 - [ ] Website - Show stats
-- [ ]  CI/CD (Deployment)
+- [ ] CI/CD (Deployment)
+- [ ] Migrate to .NET 6
 
 ## Projects
 - [x] Emsi.Playground (Console App)
