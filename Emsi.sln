@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Emsi.Playground", "src\Emsi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Emsi.Api", "src\Emsi.Api\Emsi.Api.csproj", "{12D0D483-409D-4EAF-B03C-95D2C08744D9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emsi.Web.ApiDashboard", "src\Emsi.Web.ApiDashboard\Emsi.Web.ApiDashboard.csproj", "{D6FEB1C2-35CA-4B01-965A-D42627437762}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{12D0D483-409D-4EAF-B03C-95D2C08744D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12D0D483-409D-4EAF-B03C-95D2C08744D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12D0D483-409D-4EAF-B03C-95D2C08744D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6FEB1C2-35CA-4B01-965A-D42627437762}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6FEB1C2-35CA-4B01-965A-D42627437762}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6FEB1C2-35CA-4B01-965A-D42627437762}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6FEB1C2-35CA-4B01-965A-D42627437762}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
