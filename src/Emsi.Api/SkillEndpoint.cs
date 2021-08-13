@@ -20,5 +20,11 @@ namespace Emsi.Api
 
         public Task<MetaDto?> GetMetaAsync()
             => _client.GetAsync<MetaDto>($"{Endpoint}/meta");
+
+        public Task<SkillsDto?> GetSkillsAsync(string version, string queryparams)
+            => _client.GetAsync<SkillsDto>($"{Endpoint}/versions/{version}/skills?{queryparams}");
+
+        public Task<SkillIdDto> GetSkillbyIDAsync(string version, string id)
+            => _client.GetAsync<SkillIdDto>($"{Endpoint}/versions/{version}/skills/{id}");
     }
 }
