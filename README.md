@@ -7,7 +7,8 @@ The purpose of this project is to help you exploring Emsi APIs and speed up your
 - [x] Check Emsi Endpoints https://api.emsidata.com/apis/skills
 - [x] Create Postman collection
 - [x] Create Console Application to access APIs
-- [ ] Create Library to access APIs, add this Library to NuGet, implement CI/CD (Deployment)
+- [x] Create Emsi.Api Library to access APIs
+- [ ] Add Emsi.Api Library to NuGet by using Github Actions - CI/CD (Deployment)
 - [ ] Add ErrorDto parsing
 - [ ] Create Console Application which uses the library
 - [ ] Create Database Layer / Library to store data by using the Library above (SQLite)
@@ -15,12 +16,13 @@ The purpose of this project is to help you exploring Emsi APIs and speed up your
 - [ ] Website - Add Search Skill
 - [ ] Website - Add Search Skill by Type
 - [ ] Website - Show stats
-- [ ]  CI/CD (Deployment)
+- [ ] CI/CD (Deployment)
+- [ ] Add some documentation
+- [ ] Migrate to .NET 6
 
 ## Projects
 - [x] Emsi.Playground (Console App)
-- [ ]  Emsi.Api.Client (Library, NuGet)
-  - Emsi.Api.Skills
+- [x] Emsi.Api.Client (Library, NuGet)
 - [ ]  Emsi.Api.Console (Console App)
 - [ ]  Emsi.Database (Library, SQLite)
 - [ ]  Emsi.Api.Sync.Console (Console App) 
