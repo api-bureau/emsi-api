@@ -1,3 +1,4 @@
+using Emsi.Api.Dtos;
 using IdentityModel.Client;
 using Microsoft.Extensions.Options;
 using System;
@@ -71,6 +72,31 @@ namespace Emsi.Api
         }
 
         //ToDo Add PostAsync()
+
+        public async Task<TResponse?> PostAsync<TResponse>(string endpoint, object body)
+        {
+            await CheckConnectionAsync();
+
+            TResponse? dto;
+
+            try
+            {
+                var response = await _client.PostAsJsonAsync($"{_settings.BaseUrl}{endpoint}", body);
+
+                var content = await response.Content.ReadAsStringAsync();
+
+                dto = await JsonSerializer.DeserializeAsync<TResponse>(await response.Content.ReadAsStreamAsync());
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine($"My message: {e.Message}");
+
+                throw;
+            }
+
+            return dto;
+        }
 
         private async Task CheckConnectionAsync()
         {
