@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Emsi.Api\Emsi.Api.csproj" />
+    <ProjectReference Include="..\Emsi.Web.ApiDashboard\Emsi.Web.ApiDashboard.csproj" />
   </ItemGroup>
 
   <ItemGroup>

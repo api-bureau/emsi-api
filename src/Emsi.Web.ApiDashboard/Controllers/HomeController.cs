@@ -20,9 +20,16 @@ namespace Emsi.Web.ApiDashboard.Controllers
 
         public async Task<IActionResult> IndexAsync()
         {
-            var status = await _client.Skills.GetStatusAsync();
+            var viewModel = new HomeViewModel("Emsi API Dashboard")
+            {
+                Meta = await _client.Skills.GetMetaAsync(),
+                Status = await _client.Skills.GetStatusAsync(),
+                IsAlert = true,
+                Message = "Maintance on 15th August 2021 10:00-20:00",
+                Type = AlertType.Danger
+            };
 
-            return View(status);
+            return View(viewModel);
         }
 
         public IActionResult Privacy()

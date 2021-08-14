@@ -1,4 +1,5 @@
 using Emsi.Api;
+using Emsi.Web.ApiDashboard;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 

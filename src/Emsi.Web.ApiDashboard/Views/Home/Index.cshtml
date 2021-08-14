@@ -1,18 +1,69 @@
-@model Emsi.Api.Dtos.StatusDto
+@model HomeViewModel
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = @Model.Title;
 }
+@if (Model.IsAlert)
+{
+    <partial name="_AlertPartial" model="Model" />
+}
+@*<h1 class="display-4">@Model.Title</h1>*@
+@*<h2>Skills API</h2>*@
+<div class="row">
+    <div class="col">
+        <div class="card shadow-sm bg-white">
+            <div class="card-body">
+                <h3>Status</h3>
+                <p>
+                    <strong>Skills API:</strong>
+                    @if (Model.Status is not null)
+                    {
+                        <span><i class="bi bi-check-circle-fill text-success"></i> @Model.Status.Data.Healthy,</span>
+                        <span>@Model.Status.Data.Message</span>
+                    }
+                </p>
+                <p>
+                    <strong>Job Titles API:</strong>
+                    @if (Model.Status is not null)
+                    {
+                        <span><i class="bi bi-check-circle-fill text-success"></i> @Model.Status.Data.Healthy,</span>
+                        <span>@Model.Status.Data.Message</span>
+                    }
+                </p>
+                <p>
+                    <strong>Profile API:</strong>
+                    @if (Model.Status is not null)
+                    {
+                        <span><i class="bi bi-check-circle-fill text-success"></i> @Model.Status.Data.Healthy,</span>
+                        <span>@Model.Status.Data.Message</span>
+                    }
+                </p>
 
-<div class="text-center">
-    <h1 class="display-4">Emsi API Dashboard</h1>
-    <h2>Skills API</h2>
-    <p>@Model.Data.Healthy</p>
-    <p>@Model.Data.Message</p>
-    <canvas id="myChart" width="400" height="400"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card shadow-sm bg-white">
+            <div class="card-body">
+                <h3>Meta</h3>
+                <p>@Model.Meta.Data.LatestVersion</p>
+                <p>@Model.Meta.Data.Attribution.Title</p>
+                <p>@Model.Meta.Data.Attribution.Body</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <div class="col-6">
+        <div class="card shadow-sm bg-white">
+            <div class="card-body">
+                <canvas id="myChart" width="400" height="400"></canvas>
+            </div>
+        </div>
+    </div>
 </div>
 
 @section Scripts {
-    <script>
+<script>
     var ctx = document.getElementById('myChart').getContext('2d');
     var myChart = new Chart(ctx, {
         type: 'bar',
@@ -48,5 +99,5 @@
             }
         }
     });
-    </script>
+</script>
 }
