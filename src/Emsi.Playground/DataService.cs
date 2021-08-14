@@ -1,5 +1,7 @@
 using Emsi.Api;
+using Emsi.Api.Dtos;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Emsi.Playground
@@ -138,12 +140,107 @@ namespace Emsi.Playground
                     }
                 }
 
-                //List<string> ids = new List<string> { "KS1200364C9C1LK3V5Q1", "KS1275N74XZ574T7N47D", "KS125QD6K0QLLKCTPJQ0" };
-                //_emsiClient.Skills.GetRelatedSkillsAsync(version, ids);
+                List<string> ids = new List<string> { "KS1200364C9C1LK3V5Q1", "KS1275N74XZ574T7N47D", "KS125QD6K0QLLKCTPJQ0" };
 
+                var request = new RequestIdsDto { Ids = ids };
+                var relatedSkillsDto = await _emsiClient.Skills.GetRelatedSkillsAsync(version, request);
+
+                if (relatedSkillsDto is not null)
+                {
+                    Console.WriteLine("Attributions:");
+
+                    foreach (var attribution in relatedSkillsDto.Attributions)
+                    {
+                        Console.WriteLine(attribution.Name);
+                        Console.WriteLine(attribution.Text);
+                    }
+
+                    Console.WriteLine("Datas:");
+
+                    foreach (var data in relatedSkillsDto.Data)
+                    {
+                        Console.WriteLine($"Id: {data.Id}");
+                        Console.WriteLine($"InfoUrl: {data.InfoUrl}");
+                        Console.WriteLine($"Name: {data.Name}");
+                        Console.WriteLine("Type: ");
+                        Console.WriteLine($"Id: {data.Id}");
+                        Console.WriteLine($"Name: {data.Name}");
+                    }
+                }
+
+                var sourceTraceRequest = new RequestSourceTraceDto { text = "... Great candidates also have\n\n Experience with a particular JS MV * framework(we happen to use React)\n Experience working with databases\n Experien*/ce with AWS\n Familiarity with microservice architecture\n Familiarity with modern CSS practices, e.g.LESS, SASS, CSS -in-JS..." };
+
+                var sourceTracingDto = await _emsiClient.Skills.GetExtractSkillsSourceTracing(version, sourceTraceRequest);
+
+                if (sourceTracingDto is not null)
+                {
+                    Console.WriteLine("Attributions:");
+                    foreach (var attribution in sourceTracingDto.Attributions)
+                    {
+                        Console.WriteLine(attribution.Name);
+                        Console.WriteLine(attribution.Text);
+                    }
+
+                    Console.WriteLine("Data:");
+                    Console.WriteLine($"normalizedText: {sourceTracingDto.Data.NormalizedText}");
+
+                    Console.WriteLine("Skills:");
+                    foreach (var skill in sourceTracingDto.Data.Skills)
+                    {
+                        Console.WriteLine($"confidence: {skill.Confidence}");
+
+                        Console.WriteLine("Skill:");
+                        Console.WriteLine($"Id: {skill.Skill.Id}");
+                        Console.WriteLine($"InfoUrl: {skill.Skill.InfoUrl}");
+                        Console.WriteLine($"Name: {skill.Skill.Name}");
+                        Console.WriteLine($"Tags:");
+                        foreach (var tag in skill.Skill.Tags)
+                        {
+                            Console.WriteLine($"Name: {tag.Key}");
+                            Console.WriteLine($"Name: {tag.Value}");
+                        }
+                        Console.WriteLine($"Id: {skill.Skill.Type.Id}");
+                        Console.WriteLine($"Name: {skill.Skill.Type.Name}");
+                    }
+
+                    Console.WriteLine("Trace:");
+                    foreach (var trace in sourceTracingDto.Data.Trace)
+                    {
+                        Console.WriteLine($"confidence: {trace.ClassificationData}");
+                        Console.WriteLine("ContextForms:");
+                        foreach (var contextForm in trace.ClassificationData.ContextForms)
+                        {
+                            Console.WriteLine($"SourceEnd: {contextForm.SourceEnd}");
+                            Console.WriteLine($"SourceStart: {contextForm.SourceStart}");
+                            Console.WriteLine($"Value: {contextForm.Value}");
+                        }
+
+                        Console.WriteLine("Skills:");
+                        foreach (var skill in trace.ClassificationData.Skills)
+                        {
+                            Console.WriteLine($"Confidence: {skill.Confidence}");
+                            Console.WriteLine("Skill:");
+                            Console.WriteLine($"Id: {skill.Skill.Id}");
+                            Console.WriteLine($"InfoUrl: {skill.Skill.InfoUrl}");
+                            Console.WriteLine($"Name: {skill.Skill.Name}");
+                            Console.WriteLine($"Tags:");
+                            foreach (var tag in skill.Skill.Tags)
+                            {
+                                Console.WriteLine($"Name: {tag.Key}");
+                                Console.WriteLine($"Name: {tag.Value}");
+                            }
+                            Console.WriteLine($"Id: {skill.Skill.Type.Id}");
+                            Console.WriteLine($"Name: {skill.Skill.Type.Name}");
+                        }
+                        Console.WriteLine("SurfaceForm:");
+                        Console.WriteLine($"SourceEnd: {trace.SurfaceForm.SourceEnd}");
+                        Console.WriteLine($"SourceStart: {trace.SurfaceForm.SourceStart}");
+                        Console.WriteLine($"Value: {trace.SurfaceForm.Value}");
+                    }
+
+                }
             }
-
-
         }
     }
 }
+

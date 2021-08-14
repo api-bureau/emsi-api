@@ -1,7 +1,6 @@
 using IdentityModel.Client;
 using Microsoft.Extensions.Options;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
@@ -72,26 +71,19 @@ namespace Emsi.Api
         }
 
         //ToDo Add PostAsync()
-        //public async void Post1Async<T>(string endpoint, List<string> ids)
-        //{
-        //    await CheckConnectionAsync();
+        public async Task<TResponse?> PostAsync<TResponse>(string endpoint, object body)
+        {
+            await CheckConnectionAsync();
 
-        //    T? dto;
+            TResponse? dto;
 
-        //    var body = new Dictionary<string, List<string>>();
+            var response = await _client.PostAsJsonAsync($"{_settings.BaseUrl}{endpoint}", body);
 
-        //    body["ids"] = ids;
-        //     var 
-
-        //    if (body is not null)
-        //    {
-        //        var response = await _client.PostAsync($"{_settings.BaseUrl}{endpoint}", new FormUrlEncodedContent(paramters);
-        //        var contents = await response.Content.ReadAsStringAsync();
+            dto = await JsonSerializer.DeserializeAsync<TResponse>(await response.Content.ReadAsStreamAsync(), _jsonOptions);
 
 
-        //    }
-
-        //}
+            return dto;
+        }
 
         private async Task CheckConnectionAsync()
         {

@@ -30,11 +30,11 @@ namespace Emsi.Api
         public Task<VersionChangesDto?> GetVersionChangesAsync(string version)
             => _client.GetAsync<VersionChangesDto>($"{Endpoint}/versions/{version}/changes");
 
-        //public void GetRelatedSkillsAsync(string version, List<string> ids)
-        //{
-        //    _client.Post1Async<RelatedSkillsDto>($"{Endpoint}/versions/{version}/related", ids);
-        //}
+        public Task<RelatedSkillsDto?> GetRelatedSkillsAsync(string version, RequestIdsDto ids)
+            => _client.PostAsync<RelatedSkillsDto>($"{Endpoint}/versions/{version}/related", ids);
 
+        public Task<SourceTracingDto?> GetExtractSkillsSourceTracing(string version, RequestSourceTraceDto text)
+            => _client.PostAsync<SourceTracingDto>($"{Endpoint}/versions/{version}/extract/trace", text);
 
     }
 }
