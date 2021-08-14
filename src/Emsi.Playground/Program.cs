@@ -1,23 +1,22 @@
+using Emsi.Playground;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 
-namespace Emsi.Playground
+public class Program
 {
-    public class Program
+    public static async Task Main(string[] args)
     {
-        public static async Task Main(string[] args)
-        {
-            var services = new ServiceCollection();
 
-            var startup = new Startup();
+        var services = new ServiceCollection();
 
-            startup.ConfigureServices(services);
+        var startup = new Startup();
 
-            var serviceProvider = services.BuildServiceProvider();
+        startup.ConfigureServices(services);
 
-            var dataServices = serviceProvider.GetService<DataService>();
+        var serviceProvider = services.BuildServiceProvider();
 
-            if (dataServices != null) await dataServices.RunAsync();
-        }
+        var dataServices = serviceProvider.GetService<DataService>();
+
+        if (dataServices != null) await dataServices.RunAsync();
     }
 }
