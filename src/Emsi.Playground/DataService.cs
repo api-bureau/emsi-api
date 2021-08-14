@@ -50,19 +50,19 @@ namespace Emsi.Playground
             {
                 Console.WriteLine("\nList of all Skills:");
 
-                foreach (var attr in skillsDto.attributions)
+                foreach (var attr in skillsDto.Attributions)
                 {
-                    Console.WriteLine(attr.name);
-                    Console.WriteLine(attr.text);
+                    Console.WriteLine(attr.Name);
+                    Console.WriteLine(attr.Text);
                 }
 
-                foreach (var data in skillsDto.data)
+                foreach (var data in skillsDto.Data)
                 {
-                    Console.WriteLine(data.id);
-                    Console.WriteLine(data.infoUrl);
-                    Console.WriteLine(data.name);
-                    Console.WriteLine(data.type.id);
-                    Console.WriteLine(data.type.name);
+                    Console.WriteLine(data.Id);
+                    Console.WriteLine(data.InfoUrl);
+                    Console.WriteLine(data.Name);
+                    Console.WriteLine(data.Type.Id);
+                    Console.WriteLine(data.Type.Name);
                 }
             }
 
@@ -107,19 +107,19 @@ namespace Emsi.Playground
             {
                 Console.WriteLine("\nList of Requested Skills:");
 
-                foreach (var attr in skillDto.attributions)
+                foreach (var attr in skillDto.Attributions)
                 {
-                    Console.WriteLine(attr.name);
-                    Console.WriteLine(attr.text);
+                    Console.WriteLine(attr.Name);
+                    Console.WriteLine(attr.Text);
                 }
 
-                foreach (var data in skillDto.data)
+                foreach (var data in skillDto.Data)
                 {
-                    Console.WriteLine(data.id);
-                    Console.WriteLine(data.infoUrl);
-                    Console.WriteLine(data.name);
-                    Console.WriteLine(data.type.id);
-                    Console.WriteLine(data.type.name);
+                    Console.WriteLine(data.Id);
+                    Console.WriteLine(data.InfoUrl);
+                    Console.WriteLine(data.Name);
+                    Console.WriteLine(data.Type.Id);
+                    Console.WriteLine(data.Type.Name);
                 }
             }
 
@@ -135,27 +135,27 @@ namespace Emsi.Playground
             {
                 Console.WriteLine("\nExtracted Skills:");
 
-                foreach (var attr in skillDocDto.attributions)
+                foreach (var attr in skillDocDto.Attributions)
                 {
-                    Console.WriteLine(attr.name);
-                    Console.WriteLine(attr.text);
+                    Console.WriteLine(attr.Name);
+                    Console.WriteLine(attr.Text);
                 }
 
-                foreach (var data in skillDocDto.data)
+                foreach (var data in skillDocDto.Data)
                 {
-                    Console.WriteLine(data.confidence);
-                    Console.WriteLine(data.skill.id);
-                    Console.WriteLine(data.skill.infoUrl);
-                    Console.WriteLine(data.skill.name);
+                    Console.WriteLine(data.Confidence);
+                    Console.WriteLine(data.Skill.Id);
+                    Console.WriteLine(data.Skill.InfoUrl);
+                    Console.WriteLine(data.Skill.Name);
 
-                    foreach (var tag in data.skill.tags)
+                    foreach (var tag in data.Skill.Tags)
                     {
-                        Console.WriteLine(tag.key);
-                        Console.WriteLine(tag.value);
+                        Console.WriteLine(tag.Key);
+                        Console.WriteLine(tag.Value);
                     }
 
-                    Console.WriteLine(data.skill.type.id);
-                    Console.WriteLine(data.skill.type.name);
+                    Console.WriteLine(data.Skill.Type.Id);
+                    Console.WriteLine(data.Skill.Type.Name);
                 }
             }
         }

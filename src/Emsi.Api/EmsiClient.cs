@@ -85,7 +85,7 @@ namespace Emsi.Api
 
                 var content = await response.Content.ReadAsStringAsync();
 
-                dto = await JsonSerializer.DeserializeAsync<TResponse>(await response.Content.ReadAsStreamAsync());
+                dto = await JsonSerializer.DeserializeAsync<TResponse>(await response.Content.ReadAsStreamAsync(), _jsonOptions);
             }
 
             catch (Exception e)
