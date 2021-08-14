@@ -29,6 +29,10 @@ The purpose of this project is to help you exploring Emsi APIs and speed up your
 - [ ]  Azure Functions (Time Triggered)
 - [ ]  Emsi.Web (Web) Razor, Blazor, Angular, Azure App Service 
 
+## Web Example
+![image](https://user-images.githubusercontent.com/4528464/129445210-96d5e942-6218-4da4-8056-db4cd2eb17a1.png)
+
+
 ## Contributors
 This project adheres following guidelines.
 - https://github.com/dotnet/runtime/blob/main/docs/coding-guidelines/coding-style.md
