@@ -11,12 +11,14 @@ The purpose of this project is to help you exploring Emsi APIs and speed up your
 - [ ] Add Emsi.Api Library to NuGet by using Github Actions - CI/CD (Deployment)
 - [ ] Add ErrorDto parsing
 - [ ] Create Console Application which uses the library
+  - example emsibg skills status
 - [ ] Create Database Layer / Library to store data by using the Library above (SQLite)
 - [x] Create Website 
    - [ ] Add Razor
    - [ ] Add Blazor
    - [ ] Add Angular
    - [ ] Add Azure App Service 
+   - [ ] OData
 - [ ] Website - Add Emsi API calls
 - [ ] Website - Add Local database SQLite
 - [ ] Website - Implement CI/CD (Deployment) 
