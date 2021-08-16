@@ -1,3 +1,4 @@
+using Emsi.Api.Dtos;
 using IdentityModel.Client;
 using Microsoft.Extensions.Options;
 using System;
@@ -80,13 +81,14 @@ namespace Emsi.Api
             {
                 var response = await _client.PostAsJsonAsync($"{_settings.BaseUrl}{endpoint}", body);
 
+                var content = await response.Content.ReadAsStringAsync();
+
                 dto = await JsonSerializer.DeserializeAsync<TResponse>(await response.Content.ReadAsStreamAsync(), _jsonOptions);
             }
+
             catch (Exception e)
             {
                 Console.WriteLine($"My message: {e.Message}");
-
-                //return new ResponseDto { Error = new ErrorDto() };
 
                 throw;
             }

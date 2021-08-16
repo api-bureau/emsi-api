@@ -142,8 +142,8 @@ namespace Emsi.Playground
 
                 List<string> ids = new List<string> { "KS1200364C9C1LK3V5Q1", "KS1275N74XZ574T7N47D", "KS125QD6K0QLLKCTPJQ0" };
 
-                var request = new RequestIdsDto { Ids = ids };
-                var relatedSkillsDto = await _emsiClient.Skills.GetRelatedSkillsAsync(version, request);
+                var requestData = new RequestIdsDto { Ids = ids };
+                var relatedSkillsDto = await _emsiClient.Skills.GetRelatedSkillsAsync(version, requestData);
 
                 if (relatedSkillsDto is not null)
                 {
@@ -240,7 +240,147 @@ namespace Emsi.Playground
 
                 }
             }
+
+            string queryparams = "q=.NET&typeIds=ST1,ST2&fields=id,name,type,infoUrl&limit=5";
+
+            if (version is not null)
+            {
+                var skillsDto = await _emsiClient.Skills.GetSkillsAsync(version, queryparams);
+
+                if (skillsDto is not null)
+                {
+                    Console.WriteLine("\nList of all Skills:");
+                    Console.WriteLine("Attributions:");
+                    foreach (var attr in skillsDto.Attributions)
+                    {
+                        Console.WriteLine($"Name: {attr.Name}");
+                        Console.WriteLine($"Text: {attr.Text}");
+                    }
+                    Console.WriteLine("Data:");
+                    foreach (var data in skillsDto.Data)
+                    {
+                        Console.WriteLine($"Id: {data.Id}");
+                        Console.WriteLine($"InfoUrl: {data.InfoUrl}");
+                        Console.WriteLine($"Name: {data.Name}");
+                        Console.WriteLine("Type:");
+                        Console.WriteLine($"Id: {data.Type.Id}");
+                        Console.WriteLine($"Name: {data.Type.Name}");
+                    }
+                }
+            }
+            string id = "KS124JB619VXG6RQ810C";
+            if (version is not null)
+            {
+                var skillIdDto = await _emsiClient.Skills.GetSkillbyIDAsync(version, id);
+
+                if (skillIdDto is not null)
+                {
+                    Console.WriteLine("\n Skill by ID:");
+                    Console.WriteLine("Attributions: ");
+
+                    foreach (var attr in skillIdDto.Attributions)
+                    {
+                        Console.WriteLine($"Name:{attr.Name}");
+                        Console.WriteLine($"Text:{attr.Text}");
+                    }
+
+                    Console.WriteLine("Data:");
+                    Console.WriteLine($"Id: {skillIdDto.Data.Id}");
+                    Console.WriteLine($"InfoUrl: {skillIdDto.Data.InfoUrl}");
+                    Console.WriteLine($"Name: {skillIdDto.Data.Name}");
+                    Console.WriteLine($"RemovedDescription: {skillIdDto.Data.RemovedDescription}");
+                    Console.WriteLine("Tags: ");
+
+                    foreach (var tag in skillIdDto.Data.Tags)
+                    {
+                        Console.WriteLine($"Key: {tag.Key}");
+                        Console.WriteLine($"Value: {tag.Value}");
+                    }
+
+                    Console.WriteLine("Type:");
+                    Console.WriteLine($"Id: {skillIdDto.Data.Type.Id}");
+                    Console.WriteLine($"Name: {skillIdDto.Data.Type.Name}");
+                }
+            }
+            var request = new RequestIdsDto
+            {
+                Ids = new[] { "KS1200364C9C1LK3V5Q1", "KS1275N74XZ574T7N47D", "KS125QD6K0QLLKCTPJQ0" }
+            };
+
+            string queryParams = "typeIds=ST1,ST2&fields=id,name,type,infoUrl";
+
+            if (version is not null)
+            {
+                var skillDto = await _emsiClient.Skills.GetSkillAsync(version, request, queryParams);
+
+                if (skillDto is not null)
+                {
+                    Console.WriteLine("\nList of Requested Skills:");
+                    Console.WriteLine("Attributions: ");
+
+                    foreach (var attr in skillDto.Attributions)
+                    {
+                        Console.WriteLine($"Name:{attr.Name}");
+                        Console.WriteLine($"Text:{attr.Text}");
+                    }
+
+                    Console.WriteLine("Data:");
+
+                    foreach (var data in skillDto.Data)
+                    {
+                        Console.WriteLine($"Id: {data.Id}");
+                        Console.WriteLine($"InfoUrl: {data.InfoUrl}");
+                        Console.WriteLine($"Name: {data.Name}");
+                        Console.WriteLine("Type:");
+                        Console.WriteLine($"Id: {data.Type.Id}");
+                        Console.WriteLine($"Name: {data.Type.Name}");
+                    }
+                }
+            }
+            var reqData = new RequestDocumentDto
+            {
+                text = "... Great candidates also have\n\n Experience with a particular JS MV* framework (we happen to use React)\n Experience working with databases\n Experience with AWS\n Familiarity with microservice architecture\n Familiarity with modern CSS practices, e.g. LESS, SASS, CSS-in-JS ...",
+                confidenceThreshold = 0.6
+            };
+
+            if (version is not null)
+            {
+                var skillDocDto = await _emsiClient.Skills.GetSkillFromDocumentAsync(version, reqData);
+
+                if (skillDocDto is not null)
+                {
+                    Console.WriteLine("\nSkills extracted from document:");
+                    Console.WriteLine("Attributions: ");
+
+                    foreach (var attr in skillDocDto.Attributions)
+                    {
+                        Console.WriteLine($"Name:{attr.Name}");
+                        Console.WriteLine($"Text:{attr.Text}");
+                    }
+                    Console.WriteLine("Data: ");
+
+                    foreach (var data in skillDocDto.Data)
+                    {
+                        Console.WriteLine($"Confidence: {data.Confidence}");
+                        Console.WriteLine("Skill: ");
+
+                        Console.WriteLine($"Id: {data.Skill.Id}");
+                        Console.WriteLine($"InfoUrl: {data.Skill.InfoUrl}");
+                        Console.WriteLine($"Name: {data.Skill.Name}");
+                        Console.WriteLine("Tags: ");
+
+                        foreach (var tag in data.Skill.Tags)
+                        {
+                            Console.WriteLine($"Key: {tag.Key}");
+                            Console.WriteLine($"Value: {tag.Value}");
+                        }
+                        Console.WriteLine("Type: ");
+
+                        Console.WriteLine($"Id: {data.Skill.Type.Id}");
+                        Console.WriteLine($"Name: {data.Skill.Type.Name}"); 
+                    }
+                }
+            }
         }
     }
 }
-

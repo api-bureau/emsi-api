@@ -1,4 +1,5 @@
 using Emsi.Api.Dtos;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Emsi.Api
@@ -36,5 +37,17 @@ namespace Emsi.Api
         public Task<SourceTracingDto?> GetExtractSkillsSourceTracing(string version, RequestSourceTraceDto text)
             => _client.PostAsync<SourceTracingDto>($"{Endpoint}/versions/{version}/extract/trace", text);
 
+
+        public Task<SkillsDto?> GetSkillsAsync(string version, string queryparams)
+            => _client.GetAsync<SkillsDto>($"{Endpoint}/versions/{version}/skills?{queryparams}");
+
+        public Task<SkillIdDto?> GetSkillbyIDAsync(string version, string id)
+            => _client.GetAsync<SkillIdDto>($"{Endpoint}/versions/{version}/skills/{id}");
+
+        public Task<SkillsDto?> GetSkillAsync(string version, RequestIdsDto ids, string queryparams)
+            => _client.PostAsync<SkillsDto>($"{Endpoint}/versions/{version}/skills?{queryparams}", ids);
+
+        public Task<SkillsDocumentDto?> GetSkillFromDocumentAsync(string version, RequestDocumentDto data)
+            => _client.PostAsync<SkillsDocumentDto>($"{Endpoint}/versions/{version}/extract", data);
     }
 }
