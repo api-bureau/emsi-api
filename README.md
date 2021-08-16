@@ -13,6 +13,7 @@ The purpose of this project is to help you exploring Emsi APIs and speed up your
 - [ ] Create Console Application which uses the library
   - example emsibg skills status
 - [ ] Create Database Layer / Library to store data by using the Library above (SQLite)
+  - Entity Framework SQL Server, MySQL 
 - [x] Create Website 
    - [ ] Add Razor
    - [ ] Add Blazor
