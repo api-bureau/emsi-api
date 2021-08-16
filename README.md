@@ -1,6 +1,6 @@
 # Emsi Client
 
-The purpose of this project is to help you exploring Emsi APIs and speed up your C# and .NET Core implementation.
+The purpose of this project is to help you exploring Emsi APIs and speed up your Emsi APIs C# and .NET Core implementation.
 
 ## To Do 
 
@@ -12,7 +12,14 @@ The purpose of this project is to help you exploring Emsi APIs and speed up your
 - [ ] Add ErrorDto parsing
 - [ ] Create Console Application which uses the library
 - [ ] Create Database Layer / Library to store data by using the Library above (SQLite)
-- [ ] Create Website which uses Emsi API or/and the local database, implement CI/CD (Deployment) 
+- [x] Create Website 
+   - [ ] Add Razor
+   - [ ] Add Blazor
+   - [ ] Add Angular
+   - [ ] Add Azure App Service 
+- [ ] Website - Add Emsi API calls
+- [ ] Website - Add Local database SQLite
+- [ ] Website - Implement CI/CD (Deployment) 
 - [ ] Website - Add Search Skill
 - [ ] Website - Add Search Skill by Type
 - [ ] Website - Show stats
@@ -23,11 +30,15 @@ The purpose of this project is to help you exploring Emsi APIs and speed up your
 ## Projects
 - [x] Emsi.Playground (Console App)
 - [x] Emsi.Api.Client (Library, NuGet)
-- [ ]  Emsi.Api.Console (Console App)
-- [ ]  Emsi.Database (Library, SQLite)
-- [ ]  Emsi.Api.Sync.Console (Console App) 
-- [ ]  Azure Functions (Time Triggered)
-- [ ]  Emsi.Web (Web) Razor, Blazor, Angular, Azure App Service 
+- [ ] Emsi.Api.Console (Console App)
+- [ ] Emsi.Database (Library, SQLite)
+- [ ] Emsi.Api.Sync.Console (Console App) 
+- [ ] Azure Functions (Time Triggered)
+- [x] Emsi.Web (Web)
+
+## Web Example
+![image](https://user-images.githubusercontent.com/4528464/129445210-96d5e942-6218-4da4-8056-db4cd2eb17a1.png)
+
 
 ## Contributors
 This project adheres following guidelines.

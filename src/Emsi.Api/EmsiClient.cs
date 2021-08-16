@@ -71,8 +71,6 @@ namespace Emsi.Api
             return dto;
         }
 
-        //ToDo Add PostAsync()
-
         public async Task<TResponse?> PostAsync<TResponse>(string endpoint, object body)
         {
             await CheckConnectionAsync();
