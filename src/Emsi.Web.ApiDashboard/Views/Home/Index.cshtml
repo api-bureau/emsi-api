@@ -17,24 +17,24 @@
                     <strong>Skills API:</strong>
                     @if (Model.Status is not null)
                     {
-                        <span><i class="bi bi-check-circle-fill text-success"></i> @Model.Status.Data.Healthy,</span>
-                        <span>@Model.Status.Data.Message</span>
+                        <span><i class="bi bi-check-circle-fill text-success"></i> @Model.Status.Healthy,</span>
+                        <span>@Model.Status.Message</span>
                     }
                 </p>
                 <p>
                     <strong>Job Titles API:</strong>
                     @if (Model.Status is not null)
                     {
-                        <span><i class="bi bi-check-circle-fill text-success"></i> @Model.Status.Data.Healthy,</span>
-                        <span>@Model.Status.Data.Message</span>
+                        <span><i class="bi bi-check-circle-fill text-success"></i> @Model.Status.Healthy,</span>
+                        <span>@Model.Status.Message</span>
                     }
                 </p>
                 <p>
                     <strong>Profile API:</strong>
                     @if (Model.Status is not null)
                     {
-                        <span><i class="bi bi-check-circle-fill text-success"></i> @Model.Status.Data.Healthy,</span>
-                        <span>@Model.Status.Data.Message</span>
+                        <span><i class="bi bi-check-circle-fill text-success"></i> @Model.Status.Healthy,</span>
+                        <span>@Model.Status.Message</span>
                     }
                 </p>
 
@@ -45,9 +45,9 @@
         <div class="card shadow-sm bg-white">
             <div class="card-body">
                 <h3>Meta</h3>
-                <p>@Model.Meta.Data.LatestVersion</p>
-                <p>@Model.Meta.Data.Attribution.Title</p>
-                <p>@Model.Meta.Data.Attribution.Body</p>
+                <p>@Model.Meta.LatestVersion</p>
+                <p>@Model.Meta.Attribution.Title</p>
+                <p>@Model.Meta.Attribution.Body</p>
             </div>
         </div>
     </div>

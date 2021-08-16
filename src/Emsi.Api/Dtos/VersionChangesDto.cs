@@ -2,11 +2,9 @@ using System.Collections.Generic;
 
 namespace Emsi.Api.Dtos
 {
-
     public class VersionChangesDto
     {
         public VersionChanges Data { get; set; } = null!;
-
     }
 
     public class VersionChanges
@@ -17,7 +15,6 @@ namespace Emsi.Api.Dtos
         public IList<Renames> Renames { get; set; } = null!;
         public IList<TaggingImprovements> TaggingImprovements { get; set; } = null!;
         public IList<TypeChanges> TypeChanges { get; set; } = null!;
-
     }
 
     public class Additions

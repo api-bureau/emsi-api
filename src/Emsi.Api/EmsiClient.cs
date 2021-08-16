@@ -1,4 +1,5 @@
 using Emsi.Api.Dtos;
+using Emsi.Api.Endpoints;
 using IdentityModel.Client;
 using Microsoft.Extensions.Options;
 using System;
@@ -49,61 +50,68 @@ namespace Emsi.Api
             _client.SetBearerToken(_accessToken);
         }
 
-        public async Task<T?> GetAsync<T>(string endpoint)
+        public async Task<ResponseDto<T>> GetAsync<T>(string endpoint)
         {
             await CheckConnectionAsync();
 
-            T? dto;
+            ResponseDto<T> dto;
 
             try
             {
-                dto = await _client.GetFromJsonAsync<T>($"{_settings.BaseUrl}{endpoint}");
+                dto = await _client.GetFromJsonAsync<ResponseDto<T>>($"{_settings.BaseUrl}{endpoint}");
             }
             catch (Exception e)
             {
                 Console.WriteLine($"My message: {e.Message}");
 
-                //return new ResponseDto { Error = new ErrorDto() };
+                dto = new ResponseDto<T>();
 
-                throw;
+                dto.AddError(e.Message);
+            };
+
+            if (dto == null)
+            {
+                dto = new ResponseDto<T>();
+
+                dto.AddError("Problem with deserialisation");
             }
 
             return dto;
         }
 
-        public async Task<TResponse?> PostAsync<TResponse>(string endpoint, object body)
+    public async Task<TResponse?> PostAsync<TResponse>(string endpoint, object body)
+    {
+        await CheckConnectionAsync();
+
+        TResponse? dto;
+
+        try
         {
-            await CheckConnectionAsync();
+            var response = await _client.PostAsJsonAsync($"{_settings.BaseUrl}{endpoint}", body);
 
-            TResponse? dto;
+            var content = await response.Content.ReadAsStringAsync();
 
-            try
-            {
-                var response = await _client.PostAsJsonAsync($"{_settings.BaseUrl}{endpoint}", body);
-
-                var content = await response.Content.ReadAsStringAsync();
-
-                dto = await JsonSerializer.DeserializeAsync<TResponse>(await response.Content.ReadAsStreamAsync(), _jsonOptions);
-            }
-
-            catch (Exception e)
-            {
-                Console.WriteLine($"My message: {e.Message}");
-
-                throw;
-            }
-
-            return dto;
+            dto = await JsonSerializer.DeserializeAsync<TResponse>(await response.Content.ReadAsStreamAsync(), _jsonOptions);
         }
 
-        private async Task CheckConnectionAsync()
+        catch (Exception e)
         {
-            //ToDo Check Expiry Time
+            Console.WriteLine($"My message: {e.Message}");
 
-            if (_accessToken == null)
-            {
-                await AuthenticateAsync();
-            }
+            throw;
+        }
+
+        return dto;
+    }
+
+    private async Task CheckConnectionAsync()
+    {
+        //ToDo Check Expiry Time
+
+        if (_accessToken == null)
+        {
+            await AuthenticateAsync();
         }
     }
+}
 }

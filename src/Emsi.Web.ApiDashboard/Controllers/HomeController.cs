@@ -22,8 +22,8 @@ namespace Emsi.Web.ApiDashboard.Controllers
         {
             var viewModel = new HomeViewModel("Emsi API Dashboard")
             {
-                Meta = await _client.Skills.GetMetaAsync(),
-                Status = await _client.Skills.GetStatusAsync(),
+                Meta = (await _client.Skills.GetMetaAsync()).Data,
+                Status = (await _client.Skills.GetStatusAsync()).Data,
                 IsAlert = true,
                 Message = "Maintance on 15th August 2021 10:00-20:00",
                 Type = AlertType.Danger
