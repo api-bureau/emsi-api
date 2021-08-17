@@ -54,7 +54,7 @@ namespace Emsi.Api
         {
             await CheckConnectionAsync();
 
-            ResponseDto<T> dto;
+            ResponseDto<T>? dto;
 
             try
             {
@@ -79,39 +79,39 @@ namespace Emsi.Api
             return dto;
         }
 
-    public async Task<TResponse?> PostAsync<TResponse>(string endpoint, object body)
-    {
-        await CheckConnectionAsync();
-
-        TResponse? dto;
-
-        try
+        public async Task<ResponseDto<T>> PostAsync<T>(string endpoint, object body)
         {
-            var response = await _client.PostAsJsonAsync($"{_settings.BaseUrl}{endpoint}", body);
+            await CheckConnectionAsync();
 
-            var content = await response.Content.ReadAsStringAsync();
+            ResponseDto<T>? dto;
 
-            dto = await JsonSerializer.DeserializeAsync<TResponse>(await response.Content.ReadAsStreamAsync(), _jsonOptions);
+            try
+            {
+                var response = await _client.PostAsJsonAsync($"{_settings.BaseUrl}{endpoint}", body);
+
+                var content = await response.Content.ReadAsStringAsync();
+
+                dto = await JsonSerializer.DeserializeAsync<ResponseDto<T>>(await response.Content.ReadAsStreamAsync(), _jsonOptions);
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine($"My message: {e.Message}");
+
+                throw;
+            }
+
+            return dto;
         }
 
-        catch (Exception e)
+        private async Task CheckConnectionAsync()
         {
-            Console.WriteLine($"My message: {e.Message}");
+            //ToDo Check Expiry Time
 
-            throw;
+            if (_accessToken == null)
+            {
+                await AuthenticateAsync();
+            }
         }
-
-        return dto;
     }
-
-    private async Task CheckConnectionAsync()
-    {
-        //ToDo Check Expiry Time
-
-        if (_accessToken == null)
-        {
-            await AuthenticateAsync();
-        }
-    }
-}
 }
