@@ -33,7 +33,8 @@ The purpose of this project is to help you exploring Emsi APIs and speed up your
 ## Projects
 - [x] Emsi.Playground (Console App)
 - [x] Emsi.Api.Client (Library, NuGet)
-- [ ] Emsi.Api.Console (Console App)
+- [x] Emsi.Api.Console (Console App)
+- [x] Emsi.Web.ApiDashboard (Web App)
 - [ ] Emsi.Database (Library, SQLite)
 - [ ] Emsi.Api.Sync.Console (Console App) 
 - [ ] Azure Functions (Time Triggered)
