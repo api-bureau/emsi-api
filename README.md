@@ -10,9 +10,8 @@ The purpose of this project is to help you exploring Emsi APIs and speed up your
 - [x] Create Emsi.Api Library to access APIs
 - [ ] Add Emsi.Api Library to NuGet by using Github Actions - CI/CD (Deployment)
 - [ ] Add ErrorDto parsing
-- [ ] Add Logging
-- [ ] Create Console Application which uses the library
-  - example emsibg skills status
+- [x] Add Logging
+- [x] Create Console Application which uses the library
 - [ ] Create Database Layer / Library to store data by using the Library above (SQLite)
   - Entity Framework SQL Server, MySQL 
 - [x] Create Website 
@@ -49,7 +48,7 @@ You can run emsibg.exe to get the following
 - `emsibg skills status` - get status
 - `emsibg skills meta` - get meta
 - `emsibg skills versions` - lists versions
-- `misbig skills --id "id" --version "7.23"` - list specific skill, version is optional, default is latest
+- `emisbg skills --id "id" --version "7.23"` - list specific skill, version is optional, default is latest
 
 ## Contributors
 This project adheres following guidelines.
