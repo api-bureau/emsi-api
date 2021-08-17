@@ -3,32 +3,12 @@
 The purpose of this project is to help you exploring Emsi APIs and speed up your Emsi APIs C# and .NET Core implementation.
 
 ## To Do 
+https://github.com/VaclavElias/Emsi/projects/1
 
-- [x] Check Emsi Endpoints https://api.emsidata.com/apis/skills
-- [x] Create Postman collection
-- [x] Create Console Application to access APIs
-- [x] Create Emsi.Api Library to access APIs
-- [ ] Add Emsi.Api Library to NuGet by using Github Actions - CI/CD (Deployment)
-- [ ] Add ErrorDto parsing
-- [x] Add Logging
-- [x] Create Console Application which uses the library
-- [ ] Create Database Layer / Library to store data by using the Library above (SQLite)
-  - Entity Framework SQL Server, MySQL 
-- [x] Create Website 
-   - [ ] Add Razor
-   - [ ] Add Blazor
-   - [ ] Add Angular
-   - [ ] Add Azure App Service 
-   - [ ] OData
 - [ ] Website - Add Emsi API calls
-- [ ] Website - Add Local database SQLite
-- [ ] Website - Implement CI/CD (Deployment) 
 - [ ] Website - Add Search Skill
 - [ ] Website - Add Search Skill by Type
 - [ ] Website - Show stats
-- [ ] CI/CD (Deployment)
-- [ ] Add some documentation
-- [ ] Migrate to .NET 6
 
 ## Projects
 - [x] Emsi.Playground (Console App)
@@ -38,7 +18,6 @@ The purpose of this project is to help you exploring Emsi APIs and speed up your
 - [ ] Emsi.Database (Library, SQLite)
 - [ ] Emsi.Api.Sync.Console (Console App) 
 - [ ] Azure Functions (Time Triggered)
-- [x] Emsi.Web (Web)
 
 ## Web Example
 ![image](https://user-images.githubusercontent.com/4528464/129445210-96d5e942-6218-4da4-8056-db4cd2eb17a1.png)
