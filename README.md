@@ -43,6 +43,13 @@ The purpose of this project is to help you exploring Emsi APIs and speed up your
 ## Web Example
 ![image](https://user-images.githubusercontent.com/4528464/129445210-96d5e942-6218-4da4-8056-db4cd2eb17a1.png)
 
+## Emsi Api Console
+You can run emsibg.exe to get the following
+
+- `emsibg skills status` - get status
+- `emsibg skills meta` - get meta
+- `emsibg skills versions` - lists versions
+- `misbig skills --id "id" --version "7.23"` - list specific skill, version is optional, default is latest
 
 ## Contributors
 This project adheres following guidelines.
