@@ -1,4 +1,6 @@
+using Emsi.Api.Core;
 using Emsi.Api.Dtos;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -22,6 +24,20 @@ namespace Emsi.Api.Endpoints
             => _client.GetAsync<List<string>>($"{Endpoint}/versions");
         public Task<ResponseDto<SkillDto>> GetAsync(string version, string id)
             => _client.GetAsync<SkillDto>($"{Endpoint}/versions/{version}/skills/{id}");
+        public Task<ResponseDto<List<SkillDto>>> GetAsync(string version, SkillQuery query)
+            => _client.GetAsync<List<SkillDto>>($"{Endpoint}/versions/{version}/skills?{query.Create()}");
+
+        public Task<ResponseDto<List<SkillDto>>> GetAsync(string version, RequestIdsDto ids, SkillQueryBase query)
+            => _client.PostAsync<List<SkillDto>>($"{Endpoint}/versions/{version}/skills?{query.Create()}", ids);
+
+        [Obsolete("Use SkillQuery instead")]
+        public Task<ResponseDto<List<SkillDto>>> GetSkillsAsync(string version, string queryparams)
+            => _client.GetAsync<List<SkillDto>>($"{Endpoint}/versions/{version}/skills?{queryparams}");
+
+        //ToDo refactor RequestIds to anonymous and use  List<string>
+        [Obsolete("Use SkillQueryBase instead")]
+        public Task<ResponseDto<List<SkillDto>>> GetAsync(string version, RequestIdsDto ids, string queryparams)
+            => _client.PostAsync<List<SkillDto>>($"{Endpoint}/versions/{version}/skills?{queryparams}", ids);
 
         public Task<ResponseDto<VersionMetadataDto>> GetVersionsMetaDataAsync(string version)
             => _client.GetAsync<VersionMetadataDto>($"{Endpoint}/versions/{version}");
@@ -29,22 +45,15 @@ namespace Emsi.Api.Endpoints
         public Task<ResponseDto<VersionChangesDto>> GetVersionChangesAsync(string version)
             => _client.GetAsync<VersionChangesDto>($"{Endpoint}/versions/{version}/changes");
 
-        //public Task<ResponseDto<List<SkillDto>>> GetAsync(string version, string query, string typeIds, string fields, int limit)
-        //    => _client.GetAsync<List<SkillDto>>($"{Endpoint}/versions/{version}/skills?{queryparams}");
-
-        public Task<ResponseDto<List<SkillDto>>> GetSkillsAsync(string version, string queryparams)
-            => _client.GetAsync<List<SkillDto>>($"{Endpoint}/versions/{version}/skills?{queryparams}");
-
+        //ToDo refactor RequestIds to anonymous and use List<string>
         public Task<ResponseDto<List<SkillDto>>> GetRelatedSkillsAsync(string version, RequestIdsDto ids)
             => _client.PostAsync<List<SkillDto>>($"{Endpoint}/versions/{version}/related", ids);
 
-        //public Task<SourceTracingDto?> GetExtractSkillsSourceTracing(string version, RequestSourceTraceDto text)
-        //    => _client.PostAsync<SourceTracingDto>($"{Endpoint}/versions/{version}/extract/trace", text);
+        public Task<ResponseDto<List<SkillDocumentDto>>> ExtarctSkillsAsync(string version, RequestDocumentDto data)
+            => _client.PostAsync<List<SkillDocumentDto>>($"{Endpoint}/versions/{version}/extract", data);
 
-        public Task<ResponseDto<List<SkillDto>>> GetSkillAsync(string version, RequestIdsDto ids, string queryparams)
-            => _client.PostAsync<List<SkillDto>>($"{Endpoint}/versions/{version}/skills?{queryparams}", ids);
-
-        //public Task<SkillsDocumentDto?> GetSkillFromDocumentAsync(string version, RequestDocumentDto data)
-        //    => _client.PostAsync<SkillsDocumentDto>($"{Endpoint}/versions/{version}/extract", data);
+        //ToDo refactor RequestSourceTraceDto to anonymous
+        public Task<ResponseDto<SourceTracingDto>> ExtractSkillsWithSourceTracingAsync(string version, RequestSourceTraceDto text)
+            => _client.PostAsync<SourceTracingDto>($"{Endpoint}/versions/{version}/extract/trace", text);
     }
 }
