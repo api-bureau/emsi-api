@@ -5,11 +5,6 @@ The purpose of this project is to help you exploring Emsi APIs and speed up your
 ## To Do 
 https://github.com/VaclavElias/Emsi/projects/1
 
-- [ ] Website - Add Emsi API calls
-- [ ] Website - Add Search Skill
-- [ ] Website - Add Search Skill by Type
-- [ ] Website - Show stats
-
 ## Projects
 - [x] Emsi.Playground (Console App)
 - [x] Emsi.Api.Client (Library, NuGet)
