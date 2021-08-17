@@ -6,7 +6,6 @@ public class Program
 {
     public static async Task Main(string[] args)
     {
-
         var services = new ServiceCollection();
 
         var startup = new Startup();

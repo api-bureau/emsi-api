@@ -1,5 +1,6 @@
 using Emsi.Api;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Emsi.Playground
@@ -43,24 +44,24 @@ namespace Emsi.Playground
                 Console.WriteLine(metaResponseDto.Data.LatestVersion);
             }
 
-            //var versionDto = await _emsiClient.Skills.GetVersionsAsync();
+            var versions = await _emsiClient.Skills.GetVersionsAsync();
 
-
-            //if (versionDto is not null)
-            //{
-            //    foreach (var data in versionDto.Data)
-            //    {
-            //        Console.WriteLine(data);
-            //    }
-            //}
+            if (versions.IsSuccess)
+            {
+                foreach (var data in versions.Data!)
+                {
+                    Console.WriteLine(data);
+                }
+            }
 
             //var r = new Random();
 
             //var version = versionDto?.Data[r.Next(versionDto.Data.Count)];
+            var version = "latest";
 
             //if (version is not null)
             //{
-            var versionMetaDataDto = await _emsiClient.Skills.GetVersionsMetaDataAsync("latest");
+            var versionMetaDataDto = await _emsiClient.Skills.GetVersionsMetaDataAsync(version);
 
             if (versionMetaDataDto.IsSuccess)
             {
@@ -84,92 +85,92 @@ namespace Emsi.Playground
             }
             //}
 
-            //    var versionChangesDto = await _emsiClient.Skills.GetVersionChangesAsync(version);
+            var versionChangesResponseDto = await _emsiClient.Skills.GetVersionChangesAsync(version);
 
-            //    if (versionChangesDto is not null)
-            //    {
-            //        Console.WriteLine("\nAdditions: ");
+            if (versionChangesResponseDto.IsSuccess)
+            {
+                Console.WriteLine("\nAdditions: ");
 
-            //        foreach (var addition in versionChangesDto.Data.Additions)
-            //        {
-            //            Console.WriteLine(addition.Id);
-            //            Console.WriteLine(addition.Name);
-            //            Console.WriteLine(addition.Type);
-            //        }
+                foreach (var addition in versionChangesResponseDto.Data.Additions)
+                {
+                    Console.WriteLine(addition.Id);
+                    Console.WriteLine(addition.Name);
+                    Console.WriteLine(addition.Type);
+                }
 
-            //        Console.WriteLine("\nConsolidations: ");
+                Console.WriteLine("\nConsolidations: ");
 
-            //        foreach (var consolidation in versionChangesDto.Data.Consolidations)
-            //        {
-            //            Console.WriteLine(consolidation.IdFrom);
-            //            Console.WriteLine(consolidation.IdTo);
-            //            Console.WriteLine(consolidation.NameFrom);
-            //            Console.WriteLine(consolidation.NameTo);
-            //        }
+                foreach (var consolidation in versionChangesResponseDto.Data.Consolidations)
+                {
+                    Console.WriteLine(consolidation.IdFrom);
+                    Console.WriteLine(consolidation.IdTo);
+                    Console.WriteLine(consolidation.NameFrom);
+                    Console.WriteLine(consolidation.NameTo);
+                }
 
-            //        Console.WriteLine("\nRemovals: ");
+                Console.WriteLine("\nRemovals: ");
 
-            //        foreach (var removal in versionChangesDto.Data.Removals)
-            //        {
-            //            Console.WriteLine(removal.Id);
-            //            Console.WriteLine(removal.Name);
-            //        }
+                foreach (var removal in versionChangesResponseDto.Data.Removals)
+                {
+                    Console.WriteLine(removal.Id);
+                    Console.WriteLine(removal.Name);
+                }
 
-            //        Console.WriteLine("\nRenames: ");
+                Console.WriteLine("\nRenames: ");
 
-            //        foreach (var rename in versionChangesDto.Data.Renames)
-            //        {
-            //            Console.WriteLine(rename.Id);
-            //            Console.WriteLine(rename.NewName);
-            //            Console.WriteLine(rename.OldName);
-            //        }
+                foreach (var rename in versionChangesResponseDto.Data.Renames)
+                {
+                    Console.WriteLine(rename.Id);
+                    Console.WriteLine(rename.NewName);
+                    Console.WriteLine(rename.OldName);
+                }
 
-            //        Console.WriteLine("\nTaggingImprovements: ");
+                Console.WriteLine("\nTaggingImprovements: ");
 
-            //        foreach (var taggingImprovement in versionChangesDto.Data.TaggingImprovements)
-            //        {
-            //            Console.WriteLine(taggingImprovement.Id);
-            //            Console.WriteLine(taggingImprovement.Name);
-            //        }
+                foreach (var taggingImprovement in versionChangesResponseDto.Data.TaggingImprovements)
+                {
+                    Console.WriteLine(taggingImprovement.Id);
+                    Console.WriteLine(taggingImprovement.Name);
+                }
 
-            //        Console.WriteLine("\nTypeChanges: ");
+                Console.WriteLine("\nTypeChanges: ");
 
-            //        foreach (var typeChange in versionChangesDto.Data.TypeChanges)
-            //        {
-            //            Console.WriteLine(typeChange.Id);
-            //            Console.WriteLine(typeChange.Name);
-            //            Console.WriteLine(typeChange.NewType);
-            //            Console.WriteLine(typeChange.OldType);
-            //        }
-            //    }
+                foreach (var typeChange in versionChangesResponseDto.Data.TypeChanges)
+                {
+                    Console.WriteLine(typeChange.Id);
+                    Console.WriteLine(typeChange.Name);
+                    Console.WriteLine(typeChange.NewType);
+                    Console.WriteLine(typeChange.OldType);
+                }
+            }
 
-            //    List<string> ids = new List<string> { "KS1200364C9C1LK3V5Q1", "KS1275N74XZ574T7N47D", "KS125QD6K0QLLKCTPJQ0" };
+            var ids = new List<string> { "KS1200364C9C1LK3V5Q1", "KS1275N74XZ574T7N47D", "KS125QD6K0QLLKCTPJQ0" };
 
-            //    var requestData = new RequestIdsDto { Ids = ids };
-            //    var relatedSkillsDto = await _emsiClient.Skills.GetRelatedSkillsAsync(version, requestData);
+            var requestData = new RequestIdsDto { Ids = ids };
+            var relatedSkillsDto = await _emsiClient.Skills.GetRelatedSkillsAsync(version, requestData);
 
-            //    if (relatedSkillsDto is not null)
-            //    {
-            //        Console.WriteLine("Attributions:");
+            if (relatedSkillsDto.IsSuccess)
+            {
+                Console.WriteLine("Attributions:");
 
-            //        foreach (var attribution in relatedSkillsDto.Attributions)
-            //        {
-            //            Console.WriteLine(attribution.Name);
-            //            Console.WriteLine(attribution.Text);
-            //        }
+                foreach (var attribution in relatedSkillsDto.Attributions)
+                {
+                    Console.WriteLine(attribution.Name);
+                    Console.WriteLine(attribution.Text);
+                }
 
-            //        Console.WriteLine("Datas:");
+                Console.WriteLine("Datas:");
 
-            //        foreach (var data in relatedSkillsDto.Data)
-            //        {
-            //            Console.WriteLine($"Id: {data.Id}");
-            //            Console.WriteLine($"InfoUrl: {data.InfoUrl}");
-            //            Console.WriteLine($"Name: {data.Name}");
-            //            Console.WriteLine("Type: ");
-            //            Console.WriteLine($"Id: {data.Id}");
-            //            Console.WriteLine($"Name: {data.Name}");
-            //        }
-            //    }
+                foreach (var data in relatedSkillsDto.Data)
+                {
+                    Console.WriteLine($"Id: {data.Id}");
+                    Console.WriteLine($"InfoUrl: {data.InfoUrl}");
+                    Console.WriteLine($"Name: {data.Name}");
+                    Console.WriteLine("Type: ");
+                    Console.WriteLine($"Id: {data.Id}");
+                    Console.WriteLine($"Name: {data.Name}");
+                }
+            }
 
             //    var sourceTraceRequest = new RequestSourceTraceDto { Text = "... Great candidates also have\n\n Experience with a particular JS MV * framework(we happen to use React)\n Experience working with databases\n Experien*/ce with AWS\n Familiarity with microservice architecture\n Familiarity with modern CSS practices, e.g.LESS, SASS, CSS -in-JS..." };
 
@@ -248,34 +249,34 @@ namespace Emsi.Playground
 
             //if (version is not null)
             //{
-                var skillsDto = await _emsiClient.Skills.GetSkillsAsync("latest", queryparams);
+            var skillsDto = await _emsiClient.Skills.GetSkillsAsync(version, queryparams);
 
-                if (skillsDto.IsSuccess)
+            if (skillsDto.IsSuccess)
+            {
+                Console.WriteLine("\nList of all Skills:");
+                Console.WriteLine("Attributions:");
+                foreach (var attr in skillsDto.Attributions)
                 {
-                    Console.WriteLine("\nList of all Skills:");
-                    Console.WriteLine("Attributions:");
-                    foreach (var attr in skillsDto.Attributions)
-                    {
-                        Console.WriteLine($"Name: {attr.Name}");
-                        Console.WriteLine($"Text: {attr.Text}");
-                    }
-
-                    Console.WriteLine("Data:");
-                    foreach (var data in skillsDto.Data)
-                    {
-                        Console.WriteLine($"Id: {data.Id}");
-                        Console.WriteLine($"InfoUrl: {data.InfoUrl}");
-                        Console.WriteLine($"Name: {data.Name}");
-                        Console.WriteLine("Type:");
-                        Console.WriteLine($"Id: {data.Type.Id}");
-                        Console.WriteLine($"Name: {data.Type.Name}");
-                    }
+                    Console.WriteLine($"Name: {attr.Name}");
+                    Console.WriteLine($"Text: {attr.Text}");
                 }
+
+                Console.WriteLine("Data:");
+                foreach (var data in skillsDto.Data)
+                {
+                    Console.WriteLine($"Id: {data.Id}");
+                    Console.WriteLine($"InfoUrl: {data.InfoUrl}");
+                    Console.WriteLine($"Name: {data.Name}");
+                    Console.WriteLine("Type:");
+                    Console.WriteLine($"Id: {data.Type.Id}");
+                    Console.WriteLine($"Name: {data.Type.Name}");
+                }
+            }
             //}
             string id = "KS124JB619VXG6RQ810C";
             //if (version is not null)
             //{
-            var skillDto = await _emsiClient.Skills.GetAsync("latest", id);
+            var skillDto = await _emsiClient.Skills.GetAsync(version, id);
 
             if (skillDto.IsSuccess)
             {
@@ -308,40 +309,40 @@ namespace Emsi.Playground
                 Console.WriteLine($"Name: {skill.Type.Name}");
             }
             //}
-            //var request = new RequestIdsDto
-            //{
-            //    Ids = new[] { "KS1200364C9C1LK3V5Q1", "KS1275N74XZ574T7N47D", "KS125QD6K0QLLKCTPJQ0" }
-            //};
+            var request = new RequestIdsDto
+            {
+                Ids = new[] { "KS1200364C9C1LK3V5Q1", "KS1275N74XZ574T7N47D", "KS125QD6K0QLLKCTPJQ0" }
+            };
 
-            //string queryParams = "typeIds=ST1,ST2&fields=id,name,type,infoUrl";
+            string queryParams = "typeIds=ST1,ST2&fields=id,name,type,infoUrl";
 
             //if (version is not null)
             //{
-            //    var skillDto = await _emsiClient.Skills.GetSkillAsync(version, request, queryParams);
+            var skillsResponseDto = await _emsiClient.Skills.GetSkillAsync(version, request, queryParams);
 
-            //    if (skillDto is not null)
-            //    {
-            //        Console.WriteLine("\nList of Requested Skills:");
-            //        Console.WriteLine("Attributions: ");
+            if (skillsResponseDto.IsSuccess)
+            {
+                Console.WriteLine("\nList of Requested Skills:");
+                Console.WriteLine("Attributions: ");
 
-            //        foreach (var attr in skillDto.Attributions)
-            //        {
-            //            Console.WriteLine($"Name:{attr.Name}");
-            //            Console.WriteLine($"Text:{attr.Text}");
-            //        }
+                foreach (var attr in skillsResponseDto.Attributions)
+                {
+                    Console.WriteLine($"Name:{attr.Name}");
+                    Console.WriteLine($"Text:{attr.Text}");
+                }
 
-            //        Console.WriteLine("Data:");
+                Console.WriteLine("Data:");
 
-            //        foreach (var data in skillDto.Data)
-            //        {
-            //            Console.WriteLine($"Id: {data.Id}");
-            //            Console.WriteLine($"InfoUrl: {data.InfoUrl}");
-            //            Console.WriteLine($"Name: {data.Name}");
-            //            Console.WriteLine("Type:");
-            //            Console.WriteLine($"Id: {data.Type.Id}");
-            //            Console.WriteLine($"Name: {data.Type.Name}");
-            //        }
-            //    }
+                foreach (var data in skillsResponseDto.Data)
+                {
+                    Console.WriteLine($"Id: {data.Id}");
+                    Console.WriteLine($"InfoUrl: {data.InfoUrl}");
+                    Console.WriteLine($"Name: {data.Name}");
+                    Console.WriteLine("Type:");
+                    Console.WriteLine($"Id: {data.Type.Id}");
+                    Console.WriteLine($"Name: {data.Type.Name}");
+                }
+            }
             //}
             //var reqData = new RequestDocumentDto
             //{
