@@ -98,7 +98,16 @@ namespace Emsi.Api
             {
                 Console.WriteLine($"My message: {e.Message}");
 
-                throw;
+                dto = new ResponseDto<T>();
+
+                dto.AddError(e.Message);
+            }
+
+            if (dto == null)
+            {
+                dto = new ResponseDto<T>();
+
+                dto.AddError("Problem with deserialisation");
             }
 
             return dto;

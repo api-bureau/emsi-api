@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Emsi.Api", "src\Emsi.Api\Em
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Emsi.Web.ApiDashboard", "src\Emsi.Web.ApiDashboard\Emsi.Web.ApiDashboard.csproj", "{D6FEB1C2-35CA-4B01-965A-D42627437762}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emsi.Api.Console", "src\Emsi.Api.Console\Emsi.Api.Console.csproj", "{734052A1-A558-4843-8102-E2033DC828C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Emsi.Api.Console", "src\Emsi.Api.Console\Emsi.Api.Console.csproj", "{734052A1-A558-4843-8102-E2033DC828C7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Emsi.Data", "src\Emsi.Data\Emsi.Data.csproj", "{FEDB2651-EBD5-4C88-985B-BD184D83CD4D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{734052A1-A558-4843-8102-E2033DC828C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{734052A1-A558-4843-8102-E2033DC828C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{734052A1-A558-4843-8102-E2033DC828C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEDB2651-EBD5-4C88-985B-BD184D83CD4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEDB2651-EBD5-4C88-985B-BD184D83CD4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEDB2651-EBD5-4C88-985B-BD184D83CD4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEDB2651-EBD5-4C88-985B-BD184D83CD4D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
