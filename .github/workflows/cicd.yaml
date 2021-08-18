@@ -22,6 +22,6 @@ jobs:
       run: dotnet restore
 
     - name: Build
-      run: dotnet build -c Release --no-restore .\src\Emsi.Playground\Emsi.Playground.csproj
+      run: dotnet build -c Release --no-restore src/Emsi.Playground/Emsi.Playground.csproj
     #- name: Test
      # run: dotnet test --no-build --verbosity normal
