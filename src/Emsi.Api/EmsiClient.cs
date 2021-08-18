@@ -1,4 +1,5 @@
 using Emsi.Api.Dtos;
+using Emsi.Api.Endpoints;
 using IdentityModel.Client;
 using Microsoft.Extensions.Options;
 using System;
@@ -49,33 +50,40 @@ namespace Emsi.Api
             _client.SetBearerToken(_accessToken);
         }
 
-        public async Task<T?> GetAsync<T>(string endpoint)
+        public async Task<ResponseDto<T>> GetAsync<T>(string endpoint)
         {
             await CheckConnectionAsync();
 
-            T? dto;
+            ResponseDto<T>? dto;
 
             try
             {
-                dto = await _client.GetFromJsonAsync<T>($"{_settings.BaseUrl}{endpoint}");
+                dto = await _client.GetFromJsonAsync<ResponseDto<T>>($"{_settings.BaseUrl}{endpoint}");
             }
             catch (Exception e)
             {
                 Console.WriteLine($"My message: {e.Message}");
 
-                //return new ResponseDto { Error = new ErrorDto() };
+                dto = new ResponseDto<T>();
 
-                throw;
+                dto.AddError(e.Message);
+            };
+
+            if (dto == null)
+            {
+                dto = new ResponseDto<T>();
+
+                dto.AddError("Problem with deserialisation");
             }
 
             return dto;
         }
 
-        public async Task<TResponse?> PostAsync<TResponse>(string endpoint, object body)
+        public async Task<ResponseDto<T>> PostAsync<T>(string endpoint, object body)
         {
             await CheckConnectionAsync();
 
-            TResponse? dto;
+            ResponseDto<T>? dto;
 
             try
             {
@@ -83,7 +91,7 @@ namespace Emsi.Api
 
                 var content = await response.Content.ReadAsStringAsync();
 
-                dto = await JsonSerializer.DeserializeAsync<TResponse>(await response.Content.ReadAsStreamAsync(), _jsonOptions);
+                dto = await JsonSerializer.DeserializeAsync<ResponseDto<T>>(await response.Content.ReadAsStreamAsync(), _jsonOptions);
             }
 
             catch (Exception e)

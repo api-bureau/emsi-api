@@ -2,22 +2,14 @@ using System.Collections.Generic;
 
 namespace Emsi.Api.Dtos
 {
-
     public class VersionChangesDto
-    {
-        public VersionChanges Data { get; set; } = null!;
-
-    }
-
-    public class VersionChanges
     {
         public IList<Additions> Additions { get; set; } = null!;
         public IList<Consolidations> Consolidations { get; set; } = null!;
-        public IList<Removals> Removals { get; set; } = null!;
+        public IList<IdNameDto> Removals { get; set; } = null!;
         public IList<Renames> Renames { get; set; } = null!;
-        public IList<TaggingImprovements> TaggingImprovements { get; set; } = null!;
+        public IList<IdNameDto> TaggingImprovements { get; set; } = null!;
         public IList<TypeChanges> TypeChanges { get; set; } = null!;
-
     }
 
     public class Additions
@@ -35,7 +27,7 @@ namespace Emsi.Api.Dtos
         public string NameTo { get; set; } = null!;
     }
 
-    public class Removals
+    public class IdNameDto
     {
         public string Id { get; set; } = null!;
         public string Name { get; set; } = null!;
@@ -48,16 +40,8 @@ namespace Emsi.Api.Dtos
         public string OldName { get; set; } = null!;
     }
 
-    public class TaggingImprovements
+    public class TypeChanges : IdNameDto
     {
-        public string Id { get; set; } = null!;
-        public string Name { get; set; } = null!;
-    }
-
-    public class TypeChanges
-    {
-        public string Id { get; set; } = null!;
-        public string Name { get; set; } = null!;
         public string NewType { get; set; } = null!;
         public string OldType { get; set; } = null!;
     }

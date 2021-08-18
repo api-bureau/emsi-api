@@ -4,7 +4,7 @@ using Polly;
 using System;
 using System.Net.Http;
 
-namespace Emsi.Api
+namespace Emsi.Api.Extensions
 {
     public static class ServiceExtensions
     {
