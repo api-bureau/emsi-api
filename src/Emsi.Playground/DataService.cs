@@ -15,6 +15,11 @@ namespace Emsi.Playground
             _emsiClient = emsiClient;
         }
 
+        public async Task RunDbExample()
+        {
+
+        }
+
         public async Task RunAsync()
         {
             //var responseDto = await _emsiClient.Skills.GetStatusAsync();
@@ -147,8 +152,8 @@ namespace Emsi.Playground
 
             var ids = new List<string> { "KS1200364C9C1LK3V5Q1", "KS1275N74XZ574T7N47D", "KS125QD6K0QLLKCTPJQ0" };
 
-            var requestData = new RequestIdsDto { Ids = ids };
-            var relatedSkillsDto = await _emsiClient.Skills.GetRelatedSkillsAsync(version, requestData);
+            //var requestData = new RequestIdsDto { Ids = ids };
+            var relatedSkillsDto = await _emsiClient.Skills.GetRelatedSkillsAsync(version, ids);
 
             if (relatedSkillsDto.IsSuccess)
             {
@@ -309,15 +314,15 @@ namespace Emsi.Playground
                 Console.WriteLine($"Name: {skill.Type.Name}");
             }
 
-            var request = new RequestIdsDto
-            {
-                Ids = new[] { "KS1200364C9C1LK3V5Q1", "KS1275N74XZ574T7N47D", "KS125QD6K0QLLKCTPJQ0" }
-            };
+            //var request = new RequestIdsDto
+            //{
+            //    Ids = new[] { "KS1200364C9C1LK3V5Q1", "KS1275N74XZ574T7N47D", "KS125QD6K0QLLKCTPJQ0" }
+            //};
 
             string queryParams = "typeIds=ST1,ST2&fields=id,name,type,infoUrl";
 
 
-            var skillsResponseDto = await _emsiClient.Skills.GetAsync(version, request, queryParams);
+            var skillsResponseDto = await _emsiClient.Skills.GetAsync(version, new[] { "KS1200364C9C1LK3V5Q1", "KS1275N74XZ574T7N47D", "KS125QD6K0QLLKCTPJQ0" }, queryParams);
 
             if (skillsResponseDto.IsSuccess)
             {
