@@ -54,7 +54,10 @@ public class Program
             Handler = CommandHandler.Create(async () => await _dataService.GetStatusAsync())
         });
 
-        cmd.AddCommand(new Command("meta", "- get API meta"));
+        cmd.AddCommand(new Command("meta", "- get API meta")
+        {
+            Handler = CommandHandler.Create(async () => await _dataService.GetMetaAsync())
+        });
 
         return cmd;
     }

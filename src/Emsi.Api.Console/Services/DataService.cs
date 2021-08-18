@@ -26,5 +26,19 @@ namespace Emsi.Api.Console.Services
                 _logger.LogInformation(status.Message);
             }
         }
+
+        public async Task GetMetaAsync()
+        {
+            var dto = await _client.Skills.GetMetaAsync();
+
+            if (dto.IsSuccess)
+            {
+                var meta = dto.Data!;
+
+                _logger.LogInformation(meta.Attribution.Title);
+                _logger.LogInformation(meta.Attribution.Body);
+                _logger.LogInformation($"Latest version: {meta.LatestVersion}");
+            }
+        }
     }
 }
