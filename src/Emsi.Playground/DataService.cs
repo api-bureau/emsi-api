@@ -1,5 +1,8 @@
 using Emsi.Api;
 using Emsi.Api.Dtos;
+using Emsi.Data;
+using Emsi.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,15 +12,25 @@ namespace Emsi.Playground
     public class DataService
     {
         private readonly EmsiClient _emsiClient;
+        private readonly EmsiContext _context;
 
-        public DataService(EmsiClient emsiClient)
+        public DataService(EmsiClient emsiClient, EmsiContext context)
         {
             _emsiClient = emsiClient;
+            _context = context;
         }
 
-        public async Task RunDbExample()
+        public async Task RunDbExampleAsync()
         {
+            await _context.Skills.AddAsync(new Skill {
+                Id = "Id001",
+                Name = ".NET Dev",
+                InfoUrl = "https://"
+            });
 
+            await _context.SaveChangesAsync();
+
+            var skills = await _context.Skills.ToListAsync();
         }
 
         public async Task RunAsync()

@@ -16,6 +16,7 @@ public class Program
 
         var dataServices = serviceProvider.GetService<DataService>();
 
-        if (dataServices != null) await dataServices.RunAsync();
+        //if (dataServices != null) await dataServices.RunAsync();
+        if (dataServices != null) await dataServices.RunDbExampleAsync();
     }
 }

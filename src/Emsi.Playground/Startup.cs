@@ -1,6 +1,9 @@
 using Emsi.Api.Extensions;
+using Emsi.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Emsi.Playground
 {
@@ -20,8 +23,15 @@ namespace Emsi.Playground
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddEmsi(Configuration);
+            services.AddLogging(configure =>
+            {
+                configure.AddConfiguration(Configuration.GetSection("Logging"));
+                configure.AddConsole();
+            });
 
+            services.AddDbContext<EmsiContext>(options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddEmsi(Configuration);
             services.AddScoped<DataService>();
         }
     }
