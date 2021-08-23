@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		postman\Emsi Training.postman_environment.json = postman\Emsi Training.postman_environment.json
 		src\Emsi.Api\Emsi.Api.csproj = src\Emsi.Api\Emsi.Api.csproj
 		postman\Emsi.postman_collection.json = postman\Emsi.postman_collection.json
+		EmsiData.sql = EmsiData.sql
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Emsi.Playground", "src\Emsi.Playground\Emsi.Playground.csproj", "{0D90675C-B3BC-4766-95AC-ACABB265EEEB}"
@@ -19,7 +20,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Emsi.Web.ApiDashboard", "sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Emsi.Api.Console", "src\Emsi.Api.Console\Emsi.Api.Console.csproj", "{734052A1-A558-4843-8102-E2033DC828C7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Emsi.Data", "src\Emsi.Data\Emsi.Data.csproj", "{FEDB2651-EBD5-4C88-985B-BD184D83CD4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Emsi.Data", "src\Emsi.Data\Emsi.Data.csproj", "{D0F233F7-B54F-4F99-AEDD-01F5220A37FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,10 +44,10 @@ Global
 		{734052A1-A558-4843-8102-E2033DC828C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{734052A1-A558-4843-8102-E2033DC828C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{734052A1-A558-4843-8102-E2033DC828C7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FEDB2651-EBD5-4C88-985B-BD184D83CD4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FEDB2651-EBD5-4C88-985B-BD184D83CD4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FEDB2651-EBD5-4C88-985B-BD184D83CD4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FEDB2651-EBD5-4C88-985B-BD184D83CD4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0F233F7-B54F-4F99-AEDD-01F5220A37FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0F233F7-B54F-4F99-AEDD-01F5220A37FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0F233F7-B54F-4F99-AEDD-01F5220A37FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0F233F7-B54F-4F99-AEDD-01F5220A37FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
