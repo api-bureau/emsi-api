@@ -1,6 +1,6 @@
 [![Emsi Playground CI/CD](https://github.com/VaclavElias/Emsi/actions/workflows/cicd.yaml/badge.svg)](https://github.com/VaclavElias/Emsi/actions/workflows/cicd.yaml)
 
-# Emsi Client
+# Emsi API
 
 The purpose of this project is to help you exploring Emsi APIs and speed up your Emsi APIs C# and .NET Core implementation.
 
