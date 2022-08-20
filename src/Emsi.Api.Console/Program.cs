@@ -21,7 +21,8 @@ public static class Program
                     services.AddTransient<DataService>();
                 })
                 .UseCommandHandler<StatusCommand, StatusCommand.Handler>()
-                .UseCommandHandler<MetaCommand, MetaCommand.Handler>();
+                .UseCommandHandler<MetaCommand, MetaCommand.Handler>()
+                .UseCommandHandler<VersionCommand, VersionCommand.Handler>();
             })
             .UseDefaults().Build();
 
@@ -43,14 +44,7 @@ public static class Program
 
         cmd.AddCommand(new StatusCommand());
         cmd.AddCommand(new MetaCommand());
-
-        //var statusCommand = new Command("status", "- get API status");
-        //statusCommand.SetHandler(async () => await _dataService.GetStatusAsync());
-        //cmd.AddCommand(statusCommand);
-
-        //var metaCommand = new Command("meta", "- get API meta");
-        //metaCommand.SetHandler(async () => await _dataService.GetMetaAsync());
-        //cmd.AddCommand(metaCommand);
+        cmd.AddCommand(new VersionCommand());
 
         //var versionCommand = new Command("versions", "- get skill versions");
         //versionCommand.SetHandler(async () => await _dataService.GetVersionsAsync());

@@ -9,6 +9,7 @@ namespace Emsi.Api;
 
 public class EmsiClient
 {
+    private const string DeseralialisationIssue = "Problem with deserialisation";
     private readonly LightcastSettings _settings;
     private readonly HttpClient _client;
     private string? _accessToken;
@@ -64,13 +65,13 @@ public class EmsiClient
             dto = new ResponseDto<T>();
 
             dto.AddError(e.Message);
-        };
+        }
 
         if (dto == null)
         {
             dto = new ResponseDto<T>();
 
-            dto.AddError("Problem with deserialisation");
+            dto.AddError(DeseralialisationIssue);
         }
 
         return dto;
@@ -104,7 +105,7 @@ public class EmsiClient
         {
             dto = new ResponseDto<T>();
 
-            dto.AddError("Problem with deserialisation");
+            dto.AddError(DeseralialisationIssue);
         }
 
         return dto;

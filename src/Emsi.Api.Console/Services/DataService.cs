@@ -15,11 +15,11 @@ namespace Emsi.Api.Console.Services
 
         public async Task GetStatusAsync()
         {
-            var dto = await _client.Skills.GetStatusAsync();
+            var response = await _client.Skills.GetStatusAsync();
 
-            if (dto.IsSuccess)
+            if (response.IsSuccess)
             {
-                var status = dto.Data!;
+                var status = response.Data!;
 
                 _logger.LogInformation(status.Healthy.ToString());
                 _logger.LogInformation(status.Message);
@@ -28,15 +28,32 @@ namespace Emsi.Api.Console.Services
 
         public async Task GetMetaAsync()
         {
-            var dto = await _client.Skills.GetMetaAsync();
+            var response = await _client.Skills.GetMetaAsync();
 
-            if (dto.IsSuccess)
+            if (response.IsSuccess)
             {
-                var meta = dto.Data!;
+                var meta = response.Data!;
 
                 _logger.LogInformation(meta.Attribution.Title);
                 _logger.LogInformation(meta.Attribution.Body);
                 _logger.LogInformation($"Latest version: {meta.LatestVersion}");
+            }
+        }
+
+        public async Task GetVersionsAsync()
+        {
+            var response = await _client.Skills.GetVersionsAsync();
+
+            if (response.IsSuccess)
+            {
+                var items = response.Data!;
+
+                _logger.LogInformation("Versions: {0}", items.Count);
+
+                if (items.Count > 0)
+                {
+                    _logger.LogInformation("Sample: {0}", items[0]);
+                }
             }
         }
     }
