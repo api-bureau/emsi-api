@@ -22,6 +22,9 @@ public class SkillEndpoint
     public Task<ResponseDto<SkillDto>> GetAsync(string version, string id)
         => _client.GetAsync<SkillDto>($"{Endpoint}/versions/{version}/skills/{id}");
 
+    public Task<ResponseDto<List<SkillDto>>> GetAsync(string version, int limit)
+        => _client.GetAsync<List<SkillDto>>($"{Endpoint}/versions/{version}/skills?limit={limit}");
+
     public Task<ResponseDto<List<SkillDto>>> GetAsync(string version, SkillQuery query)
         => _client.GetAsync<List<SkillDto>>($"{Endpoint}/versions/{version}/skills?{query.Create()}");
 

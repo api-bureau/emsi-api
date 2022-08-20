@@ -22,7 +22,8 @@ public static class Program
                 })
                 .UseCommandHandler<StatusCommand, StatusCommand.Handler>()
                 .UseCommandHandler<MetaCommand, MetaCommand.Handler>()
-                .UseCommandHandler<VersionsCommand, VersionsCommand.Handler>();
+                .UseCommandHandler<VersionsCommand, VersionsCommand.Handler>()
+                .UseCommandHandler<SkillsCommand, SkillsCommand.Handler>();
             })
             .UseDefaults().Build();
 
@@ -45,14 +46,7 @@ public static class Program
         cmd.AddCommand(new StatusCommand());
         cmd.AddCommand(new MetaCommand());
         cmd.AddCommand(new VersionsCommand());
-
-        //var versionCommand = new Command("versions", "- get skill versions");
-        //versionCommand.SetHandler(async () => await _dataService.GetVersionsAsync());
-        //cmd.AddCommand(versionCommand);
-
-        //var sampleCommand = new Command("sample", "- get top 10 skills");
-        //sampleCommand.SetHandler(async () => await _dataService.GetSkillsAsync(10));
-        //cmd.AddCommand(sampleCommand);
+        cmd.AddCommand(new SkillsCommand());
 
         return cmd;
     }

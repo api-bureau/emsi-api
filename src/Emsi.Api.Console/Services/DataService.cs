@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Logging;
+using System.Text.Json;
 
 namespace Emsi.Api.Console.Services;
 
@@ -53,6 +54,23 @@ public class DataService
             if (items.Count > 0)
             {
                 _logger.LogInformation("Sample: {0}", items[0]);
+            }
+        }
+    }
+
+    public async Task GetSkillsAsync(int count)
+    {
+        var response = await _client.Skills.GetAsync("latest", count);
+
+        if (response.IsSuccess)
+        {
+            var items = response.Data!;
+
+            _logger.LogInformation("Items: {0}", items.Count);
+
+            if (items.Count > 0)
+            {
+                _logger.LogInformation("Sample: {0}", JsonSerializer.Serialize(items));
             }
         }
     }
