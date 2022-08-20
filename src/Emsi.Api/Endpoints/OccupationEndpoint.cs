@@ -1,7 +1,6 @@
-﻿namespace Emsi.Api.Endpoints
-{
-    public class OccupationEndpoint
-    {
+namespace Emsi.Api.Endpoints;
 
-    }
+public class OccupationEndpoint
+{
+
 }

@@ -1,65 +1,65 @@
-using Emsi.Api.Console;
+using Emsi.Api.Console.Commands;
 using Emsi.Api.Console.Services;
+using Emsi.Api.Extensions;
 using Microsoft.Extensions.DependencyInjection;
-using System;
+using Microsoft.Extensions.Hosting;
 using System.CommandLine;
-using System.CommandLine.Invocation;
-using System.Threading.Tasks;
+using System.CommandLine.Builder;
+using System.CommandLine.Hosting;
+using System.CommandLine.Parsing;
 
-public class Program
+public static class Program
 {
-    private static DataService _dataService = default!;
-
     public static async Task<int> Main(string[] args)
     {
-        var services = new ServiceCollection();
+        var parser = BuildCommandLine()
+            .UseHost(_ => Host.CreateDefaultBuilder(args), (builder) =>
+            {
+                builder.ConfigureServices((context, services) =>
+                {
+                    services.AddEmsi(context.Configuration);
+                    services.AddTransient<DataService>();
+                })
+                .UseCommandHandler<StatusCommand, StatusCommand.Handler>()
+                .UseCommandHandler<MetaCommand, MetaCommand.Handler>();
+            })
+            .UseDefaults().Build();
 
-        var startup = new Startup();
-
-        startup.ConfigureServices(services);
-
-        var serviceProvider = services.BuildServiceProvider();
-
-        _dataService = serviceProvider.GetService<DataService>()
-            ?? throw new ArgumentNullException($"{nameof(DataService)} cannot be null");
-
-        var cmd = GetRootCommand();
-
-        return await cmd.InvokeAsync(args);
+        return await parser.InvokeAsync(args);
     }
 
-    private static RootCommand GetRootCommand()
+    private static CommandLineBuilder BuildCommandLine()
     {
-        var cmd = new RootCommand("Emsi.API console application to fetch Emsi API.");
+        var root = new RootCommand("Lightcast.API console application to fetch Lightcast API.");
 
-        //cmd.AddCommand(new Command("test", "- test sync")
-        //{
-        //    Handler = CommandHandler.Create(async () =>
-        //    {
-        //        await _synchroniseService.SynchroniseTestAsync();
-        //    })
-        //});
+        root.AddCommand(SkillsCommand());
 
-        cmd.AddCommand(SkillsCommand());
-
-        return cmd;
+        return new CommandLineBuilder(root);
     }
 
     private static Command SkillsCommand()
     {
         var cmd = new Command("skills", "- get Skills");
 
-        cmd.AddCommand(new Command("status", "- get API status")
-        {
-            Handler = CommandHandler.Create(async () => await _dataService.GetStatusAsync())
-        });
+        cmd.AddCommand(new StatusCommand());
+        cmd.AddCommand(new MetaCommand());
 
-        cmd.AddCommand(new Command("meta", "- get API meta")
-        {
-            Handler = CommandHandler.Create(async () => await _dataService.GetMetaAsync())
-        });
+        //var statusCommand = new Command("status", "- get API status");
+        //statusCommand.SetHandler(async () => await _dataService.GetStatusAsync());
+        //cmd.AddCommand(statusCommand);
+
+        //var metaCommand = new Command("meta", "- get API meta");
+        //metaCommand.SetHandler(async () => await _dataService.GetMetaAsync());
+        //cmd.AddCommand(metaCommand);
+
+        //var versionCommand = new Command("versions", "- get skill versions");
+        //versionCommand.SetHandler(async () => await _dataService.GetVersionsAsync());
+        //cmd.AddCommand(versionCommand);
+
+        //var sampleCommand = new Command("sample", "- get top 10 skills");
+        //sampleCommand.SetHandler(async () => await _dataService.GetSkillsAsync(10));
+        //cmd.AddCommand(sampleCommand);
 
         return cmd;
     }
 }
-

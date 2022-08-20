@@ -1,5 +1,4 @@
 using Microsoft.Extensions.Logging;
-using System.Threading.Tasks;
 
 namespace Emsi.Api.Console.Services
 {

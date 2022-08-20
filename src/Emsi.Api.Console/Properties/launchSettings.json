@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "Emsi.Api.Console": {
+      "commandName": "Project",
+      "commandLineArgs": "skills status",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

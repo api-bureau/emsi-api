@@ -1,8 +1,5 @@
 using Emsi.Api.Core;
 using Emsi.Api.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Emsi.Api.Endpoints
 {

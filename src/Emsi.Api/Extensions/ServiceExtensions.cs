@@ -1,8 +1,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
-using System;
-using System.Net.Http;
 
 namespace Emsi.Api.Extensions
 {
@@ -10,7 +8,7 @@ namespace Emsi.Api.Extensions
     {
         public static IServiceCollection AddEmsi(this IServiceCollection services, IConfiguration configuration)
         {
-            services.Configure<EmsiSettings>(options => configuration.GetSection(nameof(EmsiSettings)).Bind(options));
+            services.Configure<LightcastSettings>(options => configuration.GetSection(nameof(LightcastSettings)).Bind(options));
 
             services.AddHttpClient<EmsiClient>()
                 .AddPolicyHandler(Policy.TimeoutAsync<HttpResponseMessage>(20))

@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace Emsi.Api.Dtos
 {
     public class VersionMetadataDto

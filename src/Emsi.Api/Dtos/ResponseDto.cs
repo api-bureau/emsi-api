@@ -1,11 +1,9 @@
-using System.Collections.Generic;
-
 namespace Emsi.Api.Dtos
 {
     public class ResponseDto<T>
     {
         public List<ErrorDto> Errors { get; set; } = new List<ErrorDto>();
-            
+
         public List<AttributionDto>? Attributions { get; set; }
 
         public T? Data { get; set; }

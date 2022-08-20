@@ -7,7 +7,8 @@ namespace Emsi.Api.Dtos
         public string? Status { get; set; }
 
         public ErrorDto() { }
-        public ErrorDto(string detail) {
+        public ErrorDto(string detail)
+        {
             Detail = detail;
         }
     }

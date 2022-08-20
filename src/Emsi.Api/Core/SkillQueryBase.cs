@@ -1,5 +1,3 @@
-﻿using System.Collections.Generic;
-
 namespace Emsi.Api.Core
 {
     public class SkillQueryBase

@@ -2,125 +2,121 @@ using Emsi.Api.Dtos;
 using Emsi.Api.Endpoints;
 using IdentityModel.Client;
 using Microsoft.Extensions.Options;
-using System;
-using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
-using System.Threading.Tasks;
 
-namespace Emsi.Api
+namespace Emsi.Api;
+
+public class EmsiClient
 {
-    public class EmsiClient
+    private readonly LightcastSettings _settings;
+    private readonly HttpClient _client;
+    private string? _accessToken;
+    private DateTime? _tokenExpireTime;
+    private static JsonSerializerOptions _jsonOptions = new JsonSerializerOptions
     {
-        private readonly EmsiSettings _settings;
-        private readonly HttpClient _client;
-        private string? _accessToken;
-        private DateTime? _tokenExpireTime;
-        private static JsonSerializerOptions _jsonOptions = new JsonSerializerOptions
+        PropertyNameCaseInsensitive = true,
+    };
+
+    public SkillEndpoint Skills { get; set; }
+
+    public EmsiClient(IOptions<LightcastSettings> settings, HttpClient client)
+    {
+        _settings = settings.Value;
+        _client = client;
+
+        Skills = new SkillEndpoint(this);
+    }
+
+    public async Task AuthenticateAsync()
+    {
+        var request = new ClientCredentialsTokenRequest
         {
-            PropertyNameCaseInsensitive = true,
+            Address = _settings.AuthorisationUrl,
+            ClientId = _settings.ClientId,
+            ClientSecret = _settings.ClientSecret,
+            Scope = _settings.Scope
         };
 
-        public SkillEndpoint Skills { get; set; }
+        var token = await _client.RequestClientCredentialsTokenAsync(request);
 
-        public EmsiClient(IOptions<EmsiSettings> settings, HttpClient client)
+        if (token is null) return;
+
+        _accessToken = token.AccessToken;
+
+        _client.SetBearerToken(_accessToken);
+    }
+
+    public async Task<ResponseDto<T>> GetAsync<T>(string endpoint)
+    {
+        await CheckConnectionAsync();
+
+        ResponseDto<T>? dto;
+
+        try
         {
-            _settings = settings.Value;
-            _client = client;
+            dto = await _client.GetFromJsonAsync<ResponseDto<T>>($"{_settings.BaseUrl}{endpoint}");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"My message: {e.Message}");
 
-            Skills = new SkillEndpoint(this);
+            dto = new ResponseDto<T>();
+
+            dto.AddError(e.Message);
+        };
+
+        if (dto == null)
+        {
+            dto = new ResponseDto<T>();
+
+            dto.AddError("Problem with deserialisation");
         }
 
-        public async Task AuthenticateAsync()
+        return dto;
+    }
+
+    public async Task<ResponseDto<T>> PostAsync<T>(string endpoint, object body)
+    {
+        await CheckConnectionAsync();
+
+        ResponseDto<T>? dto;
+
+        try
         {
-            var request = new ClientCredentialsTokenRequest
-            {
-                Address = _settings.AuthorisationUrl,
-                ClientId = _settings.ClientId,
-                ClientSecret = _settings.ClientSecret,
-                Scope = _settings.Scope
-            };
+            var response = await _client.PostAsJsonAsync($"{_settings.BaseUrl}{endpoint}", body);
 
-            var token = await _client.RequestClientCredentialsTokenAsync(request);
+            var content = await response.Content.ReadAsStringAsync();
 
-            if (token is null) return;
-
-            _accessToken = token.AccessToken;
-
-            _client.SetBearerToken(_accessToken);
+            dto = await JsonSerializer.DeserializeAsync<ResponseDto<T>>(await response.Content.ReadAsStreamAsync(), _jsonOptions);
         }
 
-        public async Task<ResponseDto<T>> GetAsync<T>(string endpoint)
+        catch (Exception e)
         {
-            await CheckConnectionAsync();
+            Console.WriteLine($"My message: {e.Message}");
 
-            ResponseDto<T>? dto;
+            dto = new ResponseDto<T>();
 
-            try
-            {
-                dto = await _client.GetFromJsonAsync<ResponseDto<T>>($"{_settings.BaseUrl}{endpoint}");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"My message: {e.Message}");
-
-                dto = new ResponseDto<T>();
-
-                dto.AddError(e.Message);
-            };
-
-            if (dto == null)
-            {
-                dto = new ResponseDto<T>();
-
-                dto.AddError("Problem with deserialisation");
-            }
-
-            return dto;
+            dto.AddError(e.Message);
         }
 
-        public async Task<ResponseDto<T>> PostAsync<T>(string endpoint, object body)
+        if (dto == null)
         {
-            await CheckConnectionAsync();
+            dto = new ResponseDto<T>();
 
-            ResponseDto<T>? dto;
-
-            try
-            {
-                var response = await _client.PostAsJsonAsync($"{_settings.BaseUrl}{endpoint}", body);
-
-                var content = await response.Content.ReadAsStringAsync();
-
-                dto = await JsonSerializer.DeserializeAsync<ResponseDto<T>>(await response.Content.ReadAsStreamAsync(), _jsonOptions);
-            }
-
-            catch (Exception e)
-            {
-                Console.WriteLine($"My message: {e.Message}");
-
-                dto = new ResponseDto<T>();
-
-                dto.AddError(e.Message);
-            }
-
-            if (dto == null)
-            {
-                dto = new ResponseDto<T>();
-
-                dto.AddError("Problem with deserialisation");
-            }
-
-            return dto;
+            dto.AddError("Problem with deserialisation");
         }
 
-        private async Task CheckConnectionAsync()
-        {
-            //ToDo Check Expiry Time
+        return dto;
+    }
 
-            if (_accessToken == null)
-            {
-                await AuthenticateAsync();
-            }
+    private async Task CheckConnectionAsync()
+    {
+        //ToDo Check Expiry Time
+
+        if (_accessToken == null)
+        {
+            await AuthenticateAsync();
         }
     }
 }
