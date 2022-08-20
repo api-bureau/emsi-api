@@ -1,4 +1,4 @@
-namespace Emsi.Api;
+namespace Emsi.Api.Core;
 
 public class LightcastSettings
 {

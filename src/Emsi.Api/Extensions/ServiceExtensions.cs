@@ -1,3 +1,4 @@
+using Emsi.Api.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
