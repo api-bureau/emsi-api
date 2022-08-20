@@ -1,10 +1,9 @@
-namespace Emsi.Api.Dtos
+namespace Emsi.Api.Dtos;
+
+public class RequestSourceTraceDto
 {
-    public class RequestSourceTraceDto
-    {
-        /// <summary>
-        /// Document to be used in the skills extraction process
-        /// </summary>
-        public string Text { get; set; } = null!;
-    }
+    /// <summary>
+    /// Document to be used in the skills extraction process
+    /// </summary>
+    public string Text { get; set; } = null!;
 }

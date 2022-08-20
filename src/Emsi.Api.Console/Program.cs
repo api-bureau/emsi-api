@@ -22,7 +22,7 @@ public static class Program
                 })
                 .UseCommandHandler<StatusCommand, StatusCommand.Handler>()
                 .UseCommandHandler<MetaCommand, MetaCommand.Handler>()
-                .UseCommandHandler<VersionCommand, VersionCommand.Handler>();
+                .UseCommandHandler<VersionsCommand, VersionsCommand.Handler>();
             })
             .UseDefaults().Build();
 
@@ -44,7 +44,7 @@ public static class Program
 
         cmd.AddCommand(new StatusCommand());
         cmd.AddCommand(new MetaCommand());
-        cmd.AddCommand(new VersionCommand());
+        cmd.AddCommand(new VersionsCommand());
 
         //var versionCommand = new Command("versions", "- get skill versions");
         //versionCommand.SetHandler(async () => await _dataService.GetVersionsAsync());

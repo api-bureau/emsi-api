@@ -1,12 +1,12 @@
-﻿using Emsi.Api.Console.Services;
+using Emsi.Api.Console.Services;
 using System.CommandLine;
 using System.CommandLine.Invocation;
 
 namespace Emsi.Api.Console.Commands;
 
-public class VersionCommand : Command
+public class VersionsCommand : Command
 {
-    public VersionCommand() : base("versions", "- get skill versions") { }
+    public VersionsCommand() : base("versions", "- get skill versions") { }
 
     public new class Handler : ICommandHandler
     {
