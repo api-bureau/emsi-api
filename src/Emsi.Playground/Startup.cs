@@ -5,34 +5,33 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Emsi.Playground
+namespace Emsi.Playground;
+
+public class Startup
 {
-    public class Startup
+    private IConfigurationRoot Configuration { get; }
+
+    public Startup()
     {
-        private IConfigurationRoot Configuration { get; }
+        var builder = new ConfigurationBuilder()
+            .AddJsonFile("appsettings.json", true)
+            .AddUserSecrets<Program>()
+            .AddEnvironmentVariables();
 
-        public Startup()
+        Configuration = builder.Build();
+    }
+
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddLogging(configure =>
         {
-            var builder = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json", true)
-                .AddUserSecrets<Program>()
-                .AddEnvironmentVariables();
+            configure.AddConfiguration(Configuration.GetSection("Logging"));
+            configure.AddConsole();
+        });
 
-            Configuration = builder.Build();
-        }
+        services.AddDbContext<EmsiContext>(options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddLogging(configure =>
-            {
-                configure.AddConfiguration(Configuration.GetSection("Logging"));
-                configure.AddConsole();
-            });
-
-            services.AddDbContext<EmsiContext>(options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
-
-            services.AddEmsi(Configuration);
-            services.AddScoped<DataService>();
-        }
+        services.AddEmsi(Configuration);
+        services.AddScoped<DataService>();
     }
 }

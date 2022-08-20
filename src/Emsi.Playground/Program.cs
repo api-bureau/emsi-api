@@ -1,6 +1,5 @@
 using Emsi.Playground;
 using Microsoft.Extensions.DependencyInjection;
-using System.Threading.Tasks;
 
 public class Program
 {
@@ -16,7 +15,7 @@ public class Program
 
         var dataServices = serviceProvider.GetService<DataService>();
 
-        //if (dataServices != null) await dataServices.RunAsync();
-        if (dataServices != null) await dataServices.RunDbExampleAsync();
+        if (dataServices != null) await dataServices.RunAsync();
+        //if (dataServices != null) await dataServices.RunDbExampleAsync();
     }
 }
