@@ -3,6 +3,7 @@
     "Emsi.Api.Console": {
       "commandName": "Project",
       "commandLineArgs": "skills meta",
+      "commandLineArgs2": "skills sample",
       "environmentVariables": {
         "DOTNET_ENVIRONMENT": "Development"
       }
