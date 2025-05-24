@@ -38,6 +38,8 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 ## References
 - Request API Key https://www.economicmodeling.com/open-titles-api-contact/
 - Emsi Skills API 
+  - recent https://docs.lightcast.dev/apis/skills
+  - recent https://docs.lightcast.dev/
   - new https://lightcast.io/open-skills
   - previously https://api.emsidata.com/apis/skills
 
