@@ -1,26 +1,15 @@
 ﻿using Emsi.Api.Console.Services;
 using System.CommandLine;
-using System.CommandLine.Invocation;
 
 namespace Emsi.Api.Console.Commands;
 
 public class MetaCommand : Command
 {
-    public MetaCommand() : base("meta", "- get API meta") { }
-
-    public new class Handler : ICommandHandler
+    public MetaCommand(DataService dataService) : base("meta", "Get API metadata")
     {
-        private readonly DataService _dataService;
-
-        public Handler(DataService dataService) => _dataService = dataService;
-
-        public int Invoke(InvocationContext context) => throw new NotImplementedException();
-
-        public async Task<int> InvokeAsync(InvocationContext context)
+        SetAction(async (_, _) =>
         {
-            await _dataService.GetMetaAsync();
-
-            return 0;
-        }
+            await dataService.GetMetaAsync();
+        });
     }
 }

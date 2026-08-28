@@ -4,50 +4,32 @@ using Emsi.Api.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.CommandLine;
-using System.CommandLine.Builder;
-using System.CommandLine.Hosting;
-using System.CommandLine.Parsing;
 
 public static class Program
 {
     public static async Task<int> Main(string[] args)
     {
-        var parser = BuildCommandLine()
-            .UseHost(_ => Host.CreateDefaultBuilder(args), (builder) =>
-            {
-                builder.ConfigureServices((context, services) =>
-                {
-                    services.AddEmsi(context.Configuration);
-                    services.AddTransient<DataService>();
-                })
-                .UseCommandHandler<StatusCommand, StatusCommand.Handler>()
-                .UseCommandHandler<MetaCommand, MetaCommand.Handler>()
-                .UseCommandHandler<VersionsCommand, VersionsCommand.Handler>()
-                .UseCommandHandler<SkillsCommand, SkillsCommand.Handler>();
-            })
-            .UseDefaults().Build();
+        var builder = Host.CreateApplicationBuilder(args);
+        builder.Services.AddEmsi(builder.Configuration);
+        builder.Services.AddTransient<DataService>();
 
-        return await parser.InvokeAsync(args);
+        using var host = builder.Build();
+        var rootCommand = BuildCommandLine(host.Services.GetRequiredService<DataService>());
+
+        return await rootCommand.Parse(args).InvokeAsync();
     }
 
-    private static CommandLineBuilder BuildCommandLine()
+    private static RootCommand BuildCommandLine(DataService dataService)
     {
         var root = new RootCommand("Lightcast.API console application to fetch Lightcast API.");
 
-        root.AddCommand(SkillsCommand());
+        var skills = new Command("skills", "Get skills API information");
+        skills.Subcommands.Add(new StatusCommand(dataService));
+        skills.Subcommands.Add(new MetaCommand(dataService));
+        skills.Subcommands.Add(new VersionsCommand(dataService));
+        skills.Subcommands.Add(new SkillsCommand(dataService));
+        root.Subcommands.Add(skills);
 
-        return new CommandLineBuilder(root);
-    }
-
-    private static Command SkillsCommand()
-    {
-        var cmd = new Command("skills", "- get Skills");
-
-        cmd.AddCommand(new StatusCommand());
-        cmd.AddCommand(new MetaCommand());
-        cmd.AddCommand(new VersionsCommand());
-        cmd.AddCommand(new SkillsCommand());
-
-        return cmd;
+        return root;
     }
 }
