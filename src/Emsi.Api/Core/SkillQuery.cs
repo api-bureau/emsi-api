@@ -6,9 +6,26 @@ public class SkillQuery : SkillQueryBase
 
     public int Limit { get; set; }
 
-    //ToDo Implement query buider
     public override string Create()
     {
-        return string.Empty;
+        var parameters = new List<string>();
+        var baseQuery = base.Create();
+
+        if (!string.IsNullOrEmpty(baseQuery))
+        {
+            parameters.Add(baseQuery);
+        }
+
+        if (!string.IsNullOrWhiteSpace(Query))
+        {
+            parameters.Add($"q={Uri.EscapeDataString(Query)}");
+        }
+
+        if (Limit > 0)
+        {
+            parameters.Add($"limit={Limit}");
+        }
+
+        return string.Join('&', parameters);
     }
 }

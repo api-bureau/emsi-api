@@ -10,9 +10,20 @@ public class SkillQueryBase
     public List<string> TypeIds { get; set; } = new List<string>();
 
 
-    //ToDo Implement query buider
     public virtual string Create()
     {
-        return string.Empty;
+        var parameters = new List<string>();
+
+        if (TypeIds.Count > 0)
+        {
+            parameters.Add($"typeIds={Uri.EscapeDataString(string.Join(',', TypeIds))}");
+        }
+
+        if (!string.IsNullOrWhiteSpace(Fields))
+        {
+            parameters.Add($"fields={Uri.EscapeDataString(Fields)}");
+        }
+
+        return string.Join('&', parameters);
     }
 }

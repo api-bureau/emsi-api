@@ -1,4 +1,5 @@
 using Emsi.Api;
+using Emsi.Api.Core;
 using Emsi.Api.Dtos;
 using Emsi.Data;
 using Emsi.Data.Models;
@@ -108,7 +109,7 @@ public class DataService
         {
             Console.WriteLine("\nAdditions: ");
 
-            foreach (var addition in versionChangesResponseDto.Data.Additions)
+            foreach (var addition in versionChangesResponseDto.Data!.Additions)
             {
                 Console.WriteLine(addition.Id);
                 Console.WriteLine(addition.Name);
@@ -170,7 +171,7 @@ public class DataService
         {
             Console.WriteLine("Attributions:");
 
-            foreach (var attribution in relatedSkillsDto.Attributions)
+            foreach (var attribution in relatedSkillsDto.Attributions ?? [])
             {
                 Console.WriteLine(attribution.Name);
                 Console.WriteLine(attribution.Text);
@@ -178,7 +179,7 @@ public class DataService
 
             Console.WriteLine("Datas:");
 
-            foreach (var data in relatedSkillsDto.Data)
+            foreach (var data in relatedSkillsDto.Data!)
             {
                 Console.WriteLine($"Id: {data.Id}");
                 Console.WriteLine($"InfoUrl: {data.InfoUrl}");
@@ -196,14 +197,14 @@ public class DataService
         if (sourceTracingDto.IsSuccess)
         {
             Console.WriteLine("Attributions:");
-            foreach (var attribution in sourceTracingDto.Attributions)
+            foreach (var attribution in sourceTracingDto.Attributions ?? [])
             {
                 Console.WriteLine(attribution.Name);
                 Console.WriteLine(attribution.Text);
             }
 
             Console.WriteLine("Data:");
-            Console.WriteLine($"normalizedText: {sourceTracingDto.Data.NormalizedText}");
+            Console.WriteLine($"normalizedText: {sourceTracingDto.Data!.NormalizedText}");
 
             Console.WriteLine("Skills:");
             foreach (var skill in sourceTracingDto.Data.Skills)
@@ -262,23 +263,28 @@ public class DataService
         }
         //}
 
-        string queryparams = "q=.NET&typeIds=ST1,ST2&fields=id,name,type,infoUrl&limit=5";
+        var skillQuery = new SkillQuery
+        {
+            Query = ".NET",
+            TypeIds = ["ST1", "ST2"],
+            Fields = "id,name,type,infoUrl",
+            Limit = 5
+        };
 
-
-        var skillsDto = await _emsiClient.Skills.GetSkillsAsync(version, queryparams);
+        var skillsDto = await _emsiClient.Skills.GetAsync(version, skillQuery);
 
         if (skillsDto.IsSuccess)
         {
             Console.WriteLine("\nList of all Skills:");
             Console.WriteLine("Attributions:");
-            foreach (var attr in skillsDto.Attributions)
+            foreach (var attr in skillsDto.Attributions ?? [])
             {
                 Console.WriteLine($"Name: {attr.Name}");
                 Console.WriteLine($"Text: {attr.Text}");
             }
 
             Console.WriteLine("Data:");
-            foreach (var data in skillsDto.Data)
+            foreach (var data in skillsDto.Data!)
             {
                 Console.WriteLine($"Id: {data.Id}");
                 Console.WriteLine($"InfoUrl: {data.InfoUrl}");
@@ -296,12 +302,12 @@ public class DataService
 
         if (skillDto.IsSuccess)
         {
-            var skill = skillDto.Data;
+            var skill = skillDto.Data!;
 
             Console.WriteLine("\n Skill by ID:");
             Console.WriteLine("Attributions: ");
 
-            foreach (var attr in skillDto.Attributions)
+            foreach (var attr in skillDto.Attributions ?? [])
             {
                 Console.WriteLine($"Name:{attr.Name}");
                 Console.WriteLine($"Text:{attr.Text}");
@@ -330,17 +336,20 @@ public class DataService
         //    Ids = new[] { "KS1200364C9C1LK3V5Q1", "KS1275N74XZ574T7N47D", "KS125QD6K0QLLKCTPJQ0" }
         //};
 
-        string queryParams = "typeIds=ST1,ST2&fields=id,name,type,infoUrl";
+        var skillQueryBase = new SkillQueryBase
+        {
+            TypeIds = ["ST1", "ST2"],
+            Fields = "id,name,type,infoUrl"
+        };
 
-
-        var skillsResponseDto = await _emsiClient.Skills.GetAsync(version, new[] { "KS1200364C9C1LK3V5Q1", "KS1275N74XZ574T7N47D", "KS125QD6K0QLLKCTPJQ0" }, queryParams);
+        var skillsResponseDto = await _emsiClient.Skills.GetAsync(version, new[] { "KS1200364C9C1LK3V5Q1", "KS1275N74XZ574T7N47D", "KS125QD6K0QLLKCTPJQ0" }, skillQueryBase);
 
         if (skillsResponseDto.IsSuccess)
         {
             Console.WriteLine("\nList of Requested Skills:");
             Console.WriteLine("Attributions: ");
 
-            foreach (var attr in skillsResponseDto.Attributions)
+            foreach (var attr in skillsResponseDto.Attributions ?? [])
             {
                 Console.WriteLine($"Name:{attr.Name}");
                 Console.WriteLine($"Text:{attr.Text}");
@@ -348,7 +357,7 @@ public class DataService
 
             Console.WriteLine("Data:");
 
-            foreach (var data in skillsResponseDto.Data)
+            foreach (var data in skillsResponseDto.Data!)
             {
                 Console.WriteLine($"Id: {data.Id}");
                 Console.WriteLine($"InfoUrl: {data.InfoUrl}");
