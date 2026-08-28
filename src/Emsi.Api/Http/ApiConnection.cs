@@ -1,4 +1,3 @@
-using IdentityModel.Client;
 using Microsoft.Extensions.Options;
 using System.Net.Http.Json;
 using System.Text.Json;
@@ -35,9 +34,13 @@ namespace Emsi.Api.Http
 
             var token = await _client.RequestClientCredentialsTokenAsync(request);
 
-            if (token is null) return;
+            if (token.IsError)
+            {
+                throw new InvalidOperationException($"Unable to retrieve an access token: {token.Error ?? token.HttpErrorReason}");
+            }
 
-            _accessToken = token.AccessToken;
+            _accessToken = token.AccessToken
+                ?? throw new InvalidOperationException("The token response did not contain an access token.");
 
             _client.SetBearerToken(_accessToken);
         }
